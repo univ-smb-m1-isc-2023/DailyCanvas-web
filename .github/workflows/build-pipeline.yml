@@ -19,20 +19,16 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: |
-          npm install
-          npm run build
-
-#     - env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        #          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: node Build
+        run: npm install
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker image
         run: docker build -t daily-canvas-docker .
 
       - name: Push to GitHub Packages
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v1
         with :
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
