@@ -15,7 +15,8 @@ jobs:
         node-version: [ 20.x ]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout source code
+        uses: actions/checkout@v2
       - name: Cache node modules
         uses: actions/cache@v1
         with:
