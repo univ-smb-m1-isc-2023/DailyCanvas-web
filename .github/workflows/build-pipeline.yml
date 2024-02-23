@@ -19,10 +19,11 @@ jobs:
         with:
           node-version: 20
 
-      - name: node Build
+      - name: Install dependencies
         run: npm install
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        run: npm run build
 
       - name: Build Docker image
         run: docker build -t daily-canvas-docker .
