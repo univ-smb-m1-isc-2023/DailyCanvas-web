@@ -3,7 +3,7 @@ import {FormsModule} from "@angular/forms";
 import axios from "axios";
 import {User} from "../../model/user";
 import {NgForOf} from "@angular/common";
-import UserService from "../../services/UserService";
+import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-home',
@@ -20,13 +20,16 @@ export class HomeComponent implements OnInit{
   passwordInput: string | undefined;
   userList: User[] = [];
 
+  constructor(private userService: UserService) {
+  }
+
   login() {
     console.log('Login: ', this.loginInput);
     console.log('Password', this.passwordInput);
     if (this.loginInput === undefined || this.passwordInput === undefined) {
       return;
     }
-    UserService.inscription({name: this.loginInput, password: this.passwordInput, email: ""}).then((res) => {
+    this.userService.inscription({name: this.loginInput, password: this.passwordInput, email: ""}).then((res) => {
       console.log(res);
     });
   }
