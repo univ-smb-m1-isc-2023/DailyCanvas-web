@@ -31,11 +31,11 @@ jobs:
       - name: Build Docker image
         run: docker build -t daily-canvas-docker .
 
-#      - name: Push to GitHub Packages
-#        uses: docker/build-push-action@v1
-#        with :
-#          username: ${{ github.actor }}
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          registry: docker.pkg.github.com
-#          repository: univ-smb-m1-isc-2023/DailyCanvas/main
-#          tags: latest
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with :
+          username: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: univ-smb-m1-isc-2023/DailyCanvas-web/main
+          tags: latest
