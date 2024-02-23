@@ -1,28 +1,12 @@
-# Stage 1: Compile and Build angular codebase
+FROM node:16-alpine
 
-# Use official node image as the base image
-FROM node:latest as build
+WORKDIR /front-app
 
-# Set the working directory
-WORKDIR /usr/local/app
+COPY package*.json ./
 
-# Add the source code to app
-COPY ./ /usr/local/app/
-
-# Install all the dependencies
 RUN npm install
 
-# Generate the build of the application
-RUN npm run build
+# Mentioned exposed port for documentation
+EXPOSE 4200
 
-
-# Stage 2: Serve app with nginx server
-
-# Use official nginx image as the base image
-FROM nginx:latest
-
-# Copy the build output to replace the default nginx contents.
-COPY --from=build /usr/local/app/dist/daily-canvas-web /usr/share/nginx/html
-
-# Expose port 80
-EXPOSE 80
+CMD ["npm", "start"]
