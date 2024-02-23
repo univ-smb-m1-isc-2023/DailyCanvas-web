@@ -1,35 +1,28 @@
-# Use official Node.js image as the base image
+# Stage 1: Compile and Build angular codebase
+
+# Use official node image as the base image
 FROM node:latest as build
 
-# Set the working directory inside the container
-WORKDIR /app
+# Set the working directory
+WORKDIR /usr/local/app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+# Add the source code to app
+COPY ./ /usr/local/app/
 
-# Install dependencies
+# Install all the dependencies
 RUN npm install
 
-# Copy the entire project to the working directory
-COPY . .
-
-# Build the React app
+# Generate the build of the application
 RUN npm run build
 
-# Stage 2: Use a lightweight Node.js image for production
-FROM node:alpine
 
-# Set the working directory inside the container
-WORKDIR /app
+# Stage 2: Serve app with nginx server
 
-# Copy the build output from the previous stage
-COPY --from=build /app/build ./build
+# Use official nginx image as the base image
+FROM nginx:latest
 
-# Install serve to run the production server
-RUN npm install -g serve
+# Copy the build output to replace the default nginx contents.
+COPY --from=build /usr/local/app/dist/sample-angular-app /usr/share/nginx/html
 
-# Expose port 3000 to the outside world
-EXPOSE 3000
-
-# Command to run the production server
-CMD ["serve", "-s", "build"]
+# Expose port 80
+EXPOSE 80
