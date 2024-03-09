@@ -3,7 +3,7 @@ import {FormsModule} from "@angular/forms";
 import axios from "axios";
 import {User} from "../../model/user";
 import {NgForOf} from "@angular/common";
-import {UserService} from "../user.service";
+import {UserService} from "../../services/user/user.service";
 
 @Component({
   selector: 'app-home',
@@ -18,6 +18,7 @@ import {UserService} from "../user.service";
 export class HomeComponent implements OnInit{
   loginInput: string | undefined;
   passwordInput: string | undefined;
+  IDInput: string | undefined;
   userList: User[] = [];
 
   constructor(private userService: UserService) {
@@ -29,20 +30,41 @@ export class HomeComponent implements OnInit{
     if (this.loginInput === undefined || this.passwordInput === undefined) {
       return;
     }
-    this.userService.inscription({name: this.loginInput, password: this.passwordInput, email: ""}).then((res) => {
+    this.userService.create({username: this.loginInput, password: this.passwordInput, email: ""}).then((res) => {
       console.log(res);
     });
   }
-  async register() {
-    console.log('Register: ', this.loginInput);
-    let response = undefined
-    await axios.post('http://localhost:3000/users', {login: this.loginInput, password: this.passwordInput}).then((res) =>{ response = res.data});
-  }
 
   async getUsers() {
-    let res = await axios.get('http://localhost:3000/users');
-    this.userList = res.data;
+    this.userList = await this.userService.getAll();
     console.log("UL : "+this.userList);
+  }
+
+  async getUser() {
+    if (this.IDInput === undefined) {
+      return;
+    }
+    const id = parseInt(this.IDInput);
+    const user : User = await this.userService.get(id);
+    console.log(user);
+  }
+
+  async updateUser() {
+    if (this.IDInput === undefined || this.loginInput === undefined) {
+      return;
+    }
+    const id = parseInt(this.IDInput);
+    const user : User = await this.userService.get(id);
+    user.username = this.loginInput;
+    await this.userService.update(user);
+  }
+
+  async deleteUser() {
+    if (this.IDInput === undefined) {
+      return;
+    }
+    const id = parseInt(this.IDInput);
+    await this.userService.delete(id);
   }
 
   ngOnInit(): void {
