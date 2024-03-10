@@ -11,6 +11,9 @@ module.exports = {
         "light-lavender": "#f6f3f7",
         "dark-lavender": "#6d507a"
       },
+      fontFamily: {
+        'title': ['Le Jour Script'],
+      }
     },
   },
   plugins: [],
