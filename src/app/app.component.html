@@ -1,2 +1,6 @@
-<app-header/>
-<router-outlet></router-outlet>
+@if (loggedIn) {
+  <app-header/>
+  <router-outlet></router-outlet>
+} @else {
+  <app-register></app-register>
+}

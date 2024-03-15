@@ -1,16 +1,7 @@
-<input class="border-2 m-3" [(ngModel)]="loginInput" placeholder="Login">
-<input class="border-2 m-3"  [(ngModel)]="passwordInput" placeholder="Password">
-<button class="bg-amber-300 rounded-3xl p-3 m-3" (click)="login()">Login</button>
-<button class="bg-amber-300 rounded-3xl p-3 m-3" (click)="getUsers()">Get Users</button>
-<input class="border-2 m-3"  [(ngModel)]="IDInput" placeholder="search ID">
-<button class="bg-amber-300 rounded-3xl p-3 m-3" (click)="getUser()">Get User By ID</button>
-<button class="bg-amber-300 rounded-3xl p-3 m-3" (click)="deleteUser()">Delete User By ID</button>
-<button class="bg-amber-300 rounded-3xl p-3 m-3" (click)="updateUser()">Update User By ID</button>
-<div *ngFor="let user of userList; index as i">
-  <div>{{user.id}}</div>
-  <div>{{user.username}}</div>
-  <div>{{user.email}}</div>
-  <div>{{user.password}}</div>
-  <div class="border h-0.5 w-full"></div>
-</div>
-
+@if (user !== null) {
+  <div>
+    <input type="button" class="cursor-pointer border " (click)="disconnect()" value="Déconnexion">
+  </div>
+} @else {
+  <app-register></app-register>
+}
