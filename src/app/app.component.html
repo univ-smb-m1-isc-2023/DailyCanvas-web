@@ -1,6 +1,8 @@
-@if (loggedIn) {
+<div class="h-screen">
   <app-header/>
-  <router-outlet></router-outlet>
-} @else {
-  <app-register></app-register>
-}
+  @if (loggedIn){
+    <router-outlet></router-outlet>
+  } @else {
+    <app-register></app-register>
+  }
+</div>

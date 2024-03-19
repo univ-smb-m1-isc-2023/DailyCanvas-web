@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import {User} from "../../model/user";
-import { LocalstoreService } from '../../services/localstore/localstore.service';
 import {UserService} from "../../services/user/user.service";
 import {FormsModule} from "@angular/forms";
 @Component({

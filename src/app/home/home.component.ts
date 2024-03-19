@@ -5,6 +5,7 @@ import {NgForOf} from "@angular/common";
 import {UserService} from "../../services/user/user.service";
 import {LocalstoreService} from "../../services/localstore/localstore.service";
 import {RegisterComponent} from "../register/register.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -18,17 +19,11 @@ import {RegisterComponent} from "../register/register.component";
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
-  loginInput: string | undefined;
-  passwordInput: string | undefined;
-  IDInput: string | undefined;
-  user: User | null = null;
 
-  constructor(private localstore: LocalstoreService<User>, private userService: UserService) {
+  constructor(private localstore: LocalstoreService<User>, private userService: UserService, private router: Router) {
   }
 
-  ngOnInit(): void {
-      this.user = this.localstore.get("user");
-  }
+  ngOnInit(): void {}
 
   protected readonly LocalstoreService = LocalstoreService;
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import {HeaderComponent} from "./header/header.component";
 import {RegisterComponent} from "./register/register.component";
 import {UserService} from "../services/user/user.service";
@@ -13,19 +13,22 @@ import {UserService} from "../services/user/user.service";
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
-  title = 'DailyCanvas-web';
   loggedIn: boolean = false;
+  title = 'DailyCanvas-web';
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
     if (this.userService.getIsLoggedIn()) {
+      console.log("User is logged in");
       this.loggedIn = true;
+    }else {
+      console.log("User is not logged in");
+      this.loggedIn = false;
     }
-    this.userService.isLoggedIn.subscribe((isLoggedIn: boolean) => {
-        this.loggedIn = isLoggedIn;
+    this.userService.isLoggedIn.subscribe((value) => {
+      this.loggedIn = value;
     });
   }
-
 }
