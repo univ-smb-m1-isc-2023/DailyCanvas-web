@@ -4,7 +4,7 @@ import {User} from "../../model/user";
 import {NgForOf} from "@angular/common";
 import {UserService} from "../../services/user/user.service";
 import {LocalstoreService} from "../../services/localstore/localstore.service";
-import {RegisterComponent} from "../register/register.component";
+import {RegisterComponent} from "../connectionPages/register/register.component";
 import {Router} from "@angular/router";
 
 @Component({

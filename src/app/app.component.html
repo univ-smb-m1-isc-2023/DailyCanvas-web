@@ -1,8 +1,8 @@
-<div class="h-screen">
+<div class="h-screen flex flex-col">
   <app-header/>
   @if (loggedIn){
     <router-outlet></router-outlet>
   } @else {
-    <app-register></app-register>
+    <app-connection class="h-full"></app-connection>
   }
 </div>

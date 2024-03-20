@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {UserService} from "../../services/user/user.service";
+import {UserService} from "../../../services/user/user.service";
 
 @Component({
   selector: 'app-login',
@@ -21,6 +21,9 @@ export class LoginComponent {
     password: ''
   }
 
+  @Output() pageChange = new EventEmitter<number>();
+
+
   constructor(private userService : UserService) {}
 
   async login(form: any) {
@@ -30,5 +33,9 @@ export class LoginComponent {
       this.error = true
     }
     this.loading = false;
+  }
+
+  changePage() {
+    this.pageChange.emit(1);
   }
 }

@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import {HeaderComponent} from "./header/header.component";
-import {RegisterComponent} from "./register/register.component";
+import {RegisterComponent} from "./connectionPages/register/register.component";
 import {UserService} from "../services/user/user.service";
+import {ConnectionComponent} from "./connectionPages/connection/connection.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-    imports: [CommonModule, RouterOutlet, HeaderComponent, RegisterComponent],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, RegisterComponent, ConnectionComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

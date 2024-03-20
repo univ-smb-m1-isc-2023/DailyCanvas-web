@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {UserService} from "../../services/user/user.service";
+import {Component, EventEmitter, Output} from '@angular/core';
+import {UserService} from "../../../services/user/user.service";
 import {FormsModule} from "@angular/forms";
 @Component({
   selector: 'app-register',
@@ -18,6 +18,7 @@ export class RegisterComponent {
     email: '',
     password: ''
   }
+  @Output() pageChange = new EventEmitter<number>();
 
   constructor(private userService: UserService) {}
 
@@ -30,4 +31,7 @@ export class RegisterComponent {
     this.loading = false;
   }
 
+  changePage() {
+    this.pageChange.emit(2);
+  }
 }
