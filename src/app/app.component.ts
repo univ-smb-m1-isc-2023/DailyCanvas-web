@@ -5,11 +5,12 @@ import {HeaderComponent} from "./header/header.component";
 import {RegisterComponent} from "./connectionPages/register/register.component";
 import {UserService} from "../services/user/user.service";
 import {ConnectionComponent} from "./connectionPages/connection/connection.component";
+import {NavComponent} from "./nav/nav.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, RegisterComponent, ConnectionComponent],
+    imports: [CommonModule, RouterOutlet, HeaderComponent, RegisterComponent, ConnectionComponent, NavComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

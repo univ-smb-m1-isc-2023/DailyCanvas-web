@@ -1,7 +1,10 @@
 <div class="h-screen w-screen flex flex-col">
   <app-header/>
   @if (loggedIn){
-    <router-outlet></router-outlet>
+    <div class="h-full w-full flex">
+      <app-nav class="w-1/4"></app-nav>
+      <router-outlet></router-outlet>
+    </div>
   } @else {
     <app-connection class="h-full"></app-connection>
   }
