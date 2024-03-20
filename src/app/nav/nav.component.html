@@ -5,7 +5,7 @@
         <app-icon [pathData]="element.icon"  class="h-full w-6"></app-icon>
         <p [textContent]="element.name" class="text-lg ml-8"></p>
       </div>
-      <app-divider [color]="'dark-green'"/>
+      <app-divider [color]="'dark-green'" class="bg-dark-green"/>
       <p *ngFor="let child of element.children" [textContent]="child.name" [routerLink]="[child.link]"  class="pl-14 py-1 cursor-pointer font-light hover:text-dark-lavender transition-all"></p>
     </div>
   </div>

@@ -28,15 +28,15 @@ export class NavComponent {
       children: [
         {
           name: "Mes objectifs",
-          link: "/account"
+          link: "/challenge/my"
         },
         {
           name: "Trouver un défi",
-          link: "/account"
+          link: "/challenges"
         },
         {
           name: "Créer un défi",
-          link: "/account"
+          link: "/challenge/create"
         }
       ]
     },
@@ -46,7 +46,7 @@ export class NavComponent {
       children: [
         {
           name: "Ajouter une entrée",
-          link: "/home"
+          link: "/canvas/add"
         }
       ]
     },
@@ -56,7 +56,7 @@ export class NavComponent {
       children: [
         {
           name: "...",
-          link: "/home"
+          link: "/?"
         }
       ]
     }
