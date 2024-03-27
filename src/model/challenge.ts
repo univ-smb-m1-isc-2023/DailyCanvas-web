@@ -3,7 +3,7 @@ export interface Challenge {
   idCreator: number;
   name: string;
   description: string;
-  duration: string;
+  duration: number;
   interval: number;
   creationDate: Date;
 }

@@ -4,6 +4,7 @@
     <div>
       <label for="name">Je veux réussir à </label>
       <input id="name" type="text" formControlName="name">
+      <p *ngIf="challengeForm?.controls?.name?.errors?.['required'] && (challengeForm.dirty || challengeForm.touched)">requis</p>
     </div>
 
     <div>
