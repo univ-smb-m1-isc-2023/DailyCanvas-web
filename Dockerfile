@@ -23,7 +23,7 @@ FROM node:alpine
 WORKDIR /app
 
 # Copy the build output from the previous stage
-COPY --from=build /app/build ./build
+COPY --from=build /dist/daily-canvas-web ./dist
 
 # Install serve to run the production server
 RUN npm install -g serve
