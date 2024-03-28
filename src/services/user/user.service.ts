@@ -44,7 +44,12 @@ export class UserService extends GenericService<User>{
   }
 
   async register(user : Omit<User, 'id'>): Promise<boolean> {
-    let newUser = await this.create(user);
+    console.log('register User : ', user);
+    let res = await axios.post(`${API_URL}/auth/register`, user);
+    if (res.status != 200) {
+      return false;
+    }
+    let newUser = res.data;
     if (!newUser) {
       return false;
     }
@@ -55,7 +60,7 @@ export class UserService extends GenericService<User>{
   }
 
   async login(user : Pick<User, 'email' | 'password'>): Promise<boolean> {
-    let res = await axios.post(`${API_URL}/user/login`, user);
+    let res = await axios.post(`${API_URL}/auth/login`, user);
     if (res.status != 200) {
       return false;
     }
