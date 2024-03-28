@@ -6,7 +6,6 @@ import {UserService} from "../../../services/user/user.service";
   selector: 'app-login',
   standalone: true,
   imports: [
-    MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule
   ],
@@ -16,7 +15,6 @@ import {UserService} from "../../../services/user/user.service";
 export class LoginComponent {
   loading = false;
   error = false;
-  private authService: inject(AuthGoogleService)
 
   userDetails = {
     email: '',
@@ -41,7 +39,7 @@ export class LoginComponent {
     this.pageChange.emit(1);
   }
 
-  signInWithGoogle() {
-    this.authService.login();
-  }
+  // signInWithGoogle() {
+  //   this.authService.login();
+  // }
 }
