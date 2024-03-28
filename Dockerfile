@@ -26,10 +26,10 @@ WORKDIR /app
 COPY --from=build /dist/daily-canvas-web ./dist
 
 # Install serve to run the production server
-RUN npm install -g serve
+RUN npm install -g @angular/cli
 
 # Expose port 3000 to the outside world
 EXPOSE 4200
 
 # Command to run the production server
-CMD ["serve", "-s", "build"]
+CMD ["ng", "serve"]
