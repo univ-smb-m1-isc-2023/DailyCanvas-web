@@ -1,12 +1,3 @@
-<input class="border-2 m-3" [(ngModel)]="loginInput" placeholder="Login">
-<input class="border-2 m-3"  [(ngModel)]="passwordInput" placeholder="Password">
-<button class="bg-amber-300 rounded-3xl p-3 m-3" (click)="login()">Login</button>
-<button class="bg-amber-300 rounded-3xl p-3 m-3" (click)="register()" >Register</button>
-<button class="bg-amber-300 rounded-3xl p-3 m-3" (click)="getUsers()">Get Users</button>
-<div *ngFor="let user of userList; index as i">
-    <div>{{user.name}}</div>
-  <div>{{user.email}}</div>
-  <div>{{user.password}}</div>
-  <div class="border h-0.5 w-full"></div>
+<div>
+  <input type="button" class="cursor-pointer border " (click)="disconnect()" value="Déconnexion">
 </div>
-
