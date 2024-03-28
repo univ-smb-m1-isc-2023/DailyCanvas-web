@@ -23,7 +23,7 @@ FROM node:alpine
 WORKDIR /app
 
 # Copy the build output from the previous stage
-COPY --from=build /dist/daily-canvas-web ./dist
+COPY --from=build /dist/daily-canvas-web /app
 
 # Install serve to run the production server
 RUN npm install -g @angular/cli
