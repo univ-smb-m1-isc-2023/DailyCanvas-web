@@ -1,35 +1,29 @@
-# Use official Node.js image as the base image
-FROM node:latest as build
+# Étape 1 : Utiliser une image de base avec Node.js pour construire l'application
+FROM node:20 as builder
 
-# Set the working directory inside the container
+# Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+# Copier les fichiers nécessaires pour installer les dépendances
+COPY package.json package-lock.json ./
 
-# Install dependencies
+# Installer les dépendances
 RUN npm install
 
-# Copy the entire project to the working directory
+# Copier tous les fichiers de l'application dans le conteneur
 COPY . .
 
-# Build the React app
-RUN npm run build
+# Construire l'application Angular pour la production
+RUN npm run build --prod
 
-# Stage 2: Use a lightweight Node.js image for production
-FROM node:alpine
+# Étape 2 : Utiliser une image de base légère pour exécuter l'application
+FROM nginx:alpine
 
-# Set the working directory inside the container
-WORKDIR /app
+# Copier les fichiers de l'application construite à partir de l'étape précédente dans le répertoire de contenu de Nginx
+COPY --from=builder /app/dist/ /usr/share/nginx/html
 
-# Copy the build output from the previous stage
-COPY --from=build /app/dist/daily-canvas-web /app
+# Exposer le port 80 pour que l'application soit accessible
+EXPOSE 80
 
-# Install serve to run the production server
-RUN npm install -g @angular/cli
-
-# Expose port 3000 to the outside world
-EXPOSE 4200
-
-# Command to run the production server
-CMD ["ng", "serve"]
+# Commande pour démarrer le serveur Nginx
+CMD ["nginx", "-g", "daemon off;"]
