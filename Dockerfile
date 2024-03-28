@@ -22,8 +22,8 @@ FROM nginx:alpine
 # Copier les fichiers de l'application construite à partir de l'étape précédente dans le répertoire de contenu de Nginx
 COPY --from=builder /app/dist/ /usr/share/nginx/html
 
-# Exposer le port 3000 pour que l'application soit accessible
-EXPOSE 3000
+# Exposer le port pour que l'application soit accessible
+EXPOSE 4200
 
 # Commande pour démarrer le serveur Nginx
 CMD ["nginx", "-g", "daemon off;"]
