@@ -1,12 +1,35 @@
-FROM node:16-alpine
+# Use official Node.js image as the base image
+FROM node:latest as build
 
-WORKDIR /front-app
+# Set the working directory inside the container
+WORKDIR /app
 
+# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
+# Install dependencies
 RUN npm install
 
-# Mentioned exposed port for documentation
+# Copy the entire project to the working directory
+COPY . .
+
+# Build the React app
+RUN npm run build
+
+# Stage 2: Use a lightweight Node.js image for production
+FROM node:alpine
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the build output from the previous stage
+COPY --from=build /app/build ./build
+
+# Install serve to run the production server
+RUN npm install -g serve
+
+# Expose port 3000 to the outside world
 EXPOSE 4200
 
-CMD ["npm", "start"]
+# Command to run the production server
+CMD ["serve", "-s", "build"]
