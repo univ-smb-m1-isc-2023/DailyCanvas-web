@@ -43,20 +43,24 @@ export class UserService extends GenericService<User>{
     }
   }
 
-  async register(user : Omit<User, 'id'>): Promise<boolean> {
-    console.log('register User : ', user);
-    let res = await axios.post(`${API_URL}/auth/register`, user);
-    if (res.status != 200) {
-      return false;
+  async register(user : Omit<User, 'id'>): Promise<boolean | number> {
+    try {
+      let res = await axios.post(`${API_URL}/auth/register`, user);
+      if (res.status != 200) {
+        return res.status;
+      }
+      let newUser = res.data;
+      if (!newUser) {
+        return false;
+      }
+      this.localstore.set(newUser);
+      this._isLoggedIn.next(true);
+      console.log('create User : ', user);
+      return true;
+    }catch (e: any) {
+      console.log(e)
+      return e.response.status;
     }
-    let newUser = res.data;
-    if (!newUser) {
-      return false;
-    }
-    this.localstore.set(newUser);
-    this._isLoggedIn.next(true);
-    console.log('create User : ', user);
-    return true;
   }
 
   async login(user : Pick<User, 'email' | 'password'>): Promise<boolean> {
