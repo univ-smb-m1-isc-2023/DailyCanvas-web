@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit" [disabled]="!challengeForm.valid">Submit</button>
 
     <p>entry type</p>
     <p class="w-10 h-10 rounded-full bg-lavender">1er reponse</p>
