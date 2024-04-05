@@ -53,7 +53,7 @@ export class CreateChallengeComponent implements AfterViewInit{
         interval: Number(this.challengeForm.value.interval),
         name: <string>this.challengeForm.value.name
       };
-      this.challengeService.create(challenge).then(data => console.log(data))
+      this.challengeService.create(challenge).then(() => this.challengeForm.reset())
     } else {
       this.submittedAndInvalid = true;
     }
