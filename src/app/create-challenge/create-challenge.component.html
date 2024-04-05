@@ -19,7 +19,7 @@
 
     <div>
       <label for="duration">Je veux essayé de relever ce défi en </label>
-      <input id="duration" type="text" formControlName="duration">
+      <input id="duration" type="text" formControlName="duration"> <label for="interval"> jour.</label>
       <div *ngIf="challengeForm.controls?.duration?.dirty || challengeForm.controls?.duration?.touched || submittedAndInvalid" class="error">
         <p *ngIf="challengeForm?.controls?.duration?.errors?.['required']">Le temps du challenge est obligatoire.</p>
         <p *ngIf="challengeForm?.controls?.duration?.errors?.['pattern']">Le temps est un nombre, qui peut être à virgule (12.3).</p>
@@ -27,13 +27,13 @@
     </div>
 
     <div>
-      <label for="interval">Ce qui me permettra de </label>
+      <label for="interval">En le faisant au moins tous les </label>
       <input id="interval" type="text" formControlName="interval">
+      <label for="interval"> jour.</label>
       <div *ngIf="challengeForm.controls?.interval?.dirty || challengeForm.controls?.interval?.touched || submittedAndInvalid" class="error">
         <p *ngIf="challengeForm?.controls?.interval?.errors?.['required']">L'intervalle entre deux entrées du challenge est obligatoire.</p>
         <p *ngIf="challengeForm?.controls?.interval?.errors?.['pattern']">L'intervalle est un nombre, qui peut être à virgule (12.3).</p>
       </div>
-
     </div>
 
     <button type="submit">Submit</button>
