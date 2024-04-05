@@ -1,6 +1,6 @@
 <div class="w-full">
 
-  <form [formGroup]="challengeForm" (ngSubmit)="test()" class="w-3/5 mx-auto mt-24 p-10 bg-light-lavender border border-dark-lavender rounded-3xl shadow-xl z-10">
+  <form [formGroup]="challengeForm" (ngSubmit)="createChallenge()" class="w-3/5 mx-auto mt-24 p-10 bg-light-lavender border border-dark-lavender rounded-3xl shadow-xl z-10">
     <div>
       <label for="name">Je veux réussir à </label>
       <input id="name" type="text" formControlName="name">

@@ -3,6 +3,7 @@ import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/
 import {ChallengeService} from "../../services/challenge/challenge.service";
 import {type Challenge} from "../../model/challenge";
 import {NgIf} from "@angular/common";
+import {toNumbers} from "@angular/compiler-cli/src/version_helpers";
 
 @Component({
   selector: 'app-create-challenge',
@@ -40,7 +41,7 @@ export class CreateChallengeComponent implements AfterViewInit{
     this.renderer.setStyle(hostElement, 'flex-grow', '1');
   }
 
-  test(){
+  createChallenge(){
     console.log(this.challengeForm)
     if(this.challengeForm.status === "VALID"){
       this.submittedAndInvalid = false;
@@ -48,8 +49,8 @@ export class CreateChallengeComponent implements AfterViewInit{
         idCreator: 5, //TODO récupérer l'id dans le local store
         creationDate: new Date(),
         description: <string>this.challengeForm.value.description,
-        duration: <number>this.challengeForm.value.duration,
-        interval: <number>this.challengeForm.value.interval,
+        duration: Number(this.challengeForm.value.duration),
+        interval: Number(this.challengeForm.value.interval),
         name: <string>this.challengeForm.value.name
       };
       this.challengeService.create(challenge).then(data => console.log(data))
