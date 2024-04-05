@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Renderer2} from '@angular/core';
-import {FormGroup, FormControl, ReactiveFormsModule, Validators, FormControlStatus} from '@angular/forms';
+import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ChallengeService} from "../../services/challenge/challenge.service";
 import {type Challenge} from "../../model/challenge";
 import {NgIf} from "@angular/common";
@@ -15,6 +15,7 @@ import {NgIf} from "@angular/common";
   styleUrl: './create-challenge.component.css'
 })
 export class CreateChallengeComponent implements AfterViewInit{
+  submittedAndInvalid: boolean = false;
   challengeForm = new FormGroup({
     name: new FormControl<string>('', {
       validators: [Validators.required],
@@ -42,8 +43,9 @@ export class CreateChallengeComponent implements AfterViewInit{
   test(){
     console.log(this.challengeForm)
     if(this.challengeForm.status === "VALID"){
+      this.submittedAndInvalid = false;
       const challenge: Omit<Challenge, "id"> = {
-        idCreator: 5,
+        idCreator: 5, //TODO récupérer l'id dans le local store
         creationDate: new Date(),
         description: <string>this.challengeForm.value.description,
         duration: <number>this.challengeForm.value.duration,
@@ -51,6 +53,8 @@ export class CreateChallengeComponent implements AfterViewInit{
         name: <string>this.challengeForm.value.name
       };
       this.challengeService.create(challenge).then(data => console.log(data))
+    } else {
+      this.submittedAndInvalid = true;
     }
   }
 }

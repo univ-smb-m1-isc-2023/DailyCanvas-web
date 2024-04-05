@@ -4,42 +4,40 @@
     <div>
       <label for="name">Je veux réussir à </label>
       <input id="name" type="text" formControlName="name">
-      <div class="error">
-        <p *ngIf="challengeForm?.controls?.name?.errors?.['required'] && (challengeForm.controls?.name?.dirty || challengeForm.controls?.name?.touched)">requis</p>
+      <div *ngIf="challengeForm.controls?.name?.dirty || challengeForm.controls?.name?.touched || submittedAndInvalid" class="error">
+        <p *ngIf="challengeForm?.controls?.name?.errors?.['required']">Le nom du challenge est obligatoire.</p>
       </div>
     </div>
 
     <div>
       <label for="description">Ce qui me permettra de </label>
       <input id="description" type="text" formControlName="description">
-      <div class="error">
-        <p *ngIf="challengeForm?.controls?.description?.errors?.['required'] && (challengeForm.controls?.description?.dirty || challengeForm.controls?.description?.touched)">requis</p>
+      <div *ngIf="challengeForm.controls?.description?.dirty || challengeForm.controls?.description?.touched || submittedAndInvalid" class="error">
+        <p *ngIf="challengeForm?.controls?.description?.errors?.['required']">La description du challenge est obligatoire.</p>
       </div>
     </div>
 
     <div>
       <label for="duration">Je veux essayé de relever ce défi en </label>
       <input id="duration" type="text" formControlName="duration">
-      <div class="error">
-        <p *ngIf="challengeForm?.controls?.duration?.errors?.['required'] && (challengeForm.controls?.duration?.dirty || challengeForm.controls?.duration?.touched)">requis</p>
-        <p *ngIf="challengeForm?.controls?.duration?.errors?.['pattern'] && (challengeForm.controls?.duration?.dirty || challengeForm.controls?.duration?.touched)">pattern</p>
+      <div *ngIf="challengeForm.controls?.duration?.dirty || challengeForm.controls?.duration?.touched || submittedAndInvalid" class="error">
+        <p *ngIf="challengeForm?.controls?.duration?.errors?.['required']">Le temps du challenge est obligatoire.</p>
+        <p *ngIf="challengeForm?.controls?.duration?.errors?.['pattern']">Le temps est un nombre, qui peut être à virgule (12.3).</p>
       </div>
     </div>
 
     <div>
       <label for="interval">Ce qui me permettra de </label>
       <input id="interval" type="text" formControlName="interval">
-      <div class="error">
-        <p *ngIf="challengeForm?.controls?.interval?.errors?.['required'] && (challengeForm.controls?.interval?.dirty || challengeForm.controls?.interval?.touched)">requis</p>
-        <p *ngIf="challengeForm?.controls?.interval?.errors?.['pattern'] && (challengeForm.controls?.interval?.dirty || challengeForm.controls?.interval?.touched)">pattern</p>
+      <div *ngIf="challengeForm.controls?.interval?.dirty || challengeForm.controls?.interval?.touched || submittedAndInvalid" class="error">
+        <p *ngIf="challengeForm?.controls?.interval?.errors?.['required']">L'intervalle entre deux entrées du challenge est obligatoire.</p>
+        <p *ngIf="challengeForm?.controls?.interval?.errors?.['pattern']">L'intervalle est un nombre, qui peut être à virgule (12.3).</p>
       </div>
 
     </div>
 
-    <button type="submit">ezrze</button>
+    <button type="submit">Submit</button>
 
-
-    <p>creation date</p>
     <p>entry type</p>
     <p class="w-10 h-10 rounded-full bg-lavender">1er reponse</p>
     <p>+</p>
