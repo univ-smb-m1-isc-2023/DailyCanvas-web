@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Renderer2} from '@angular/core';
-import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormGroup, FormControl, ReactiveFormsModule, Validators, FormControlStatus} from '@angular/forms';
 import {ChallengeService} from "../../services/challenge/challenge.service";
-import {Challenge} from "../../model/challenge";
+import {type Challenge} from "../../model/challenge";
 import {NgIf} from "@angular/common";
 
 @Component({
@@ -17,11 +17,21 @@ import {NgIf} from "@angular/common";
 export class CreateChallengeComponent implements AfterViewInit{
   challengeForm = new FormGroup({
     name: new FormControl<string>('', {
-      validators: [Validators.required]
+      validators: [Validators.required],
+      nonNullable: true
     }),
-    description: new FormControl<string>('', Validators.required),
-    duration: new FormControl<number>(0, Validators.required),
-    interval: new FormControl<number>(0, Validators.required),
+    description: new FormControl<string>('', {
+      validators: [Validators.required],
+      nonNullable: true
+    }),
+    duration: new FormControl<number | null>(null, {
+      validators: [Validators.required, Validators.pattern(/^\d*\.?\d+$/)],
+      nonNullable: true
+    }),
+    interval: new FormControl<number | null>(null, {
+      validators: [Validators.required, Validators.pattern(/^\d*\.?\d+$/)],
+      nonNullable: true
+    }),
   });
   constructor(private challengeService: ChallengeService,private renderer: Renderer2, private elRef: ElementRef) { }
   ngAfterViewInit(): void {
@@ -31,14 +41,16 @@ export class CreateChallengeComponent implements AfterViewInit{
 
   test(){
     console.log(this.challengeForm)
-    // const challenge: Omit<Challenge, "id"> = {
-    //   idCreator: 5,
-    //   creationDate: new Date(),
-    //   description: this.challengeForm.value.description,
-    //   duration: this.challengeForm.value.duration,
-    //   interval: this.challengeForm.value.interval,
-    //   name: this.challengeForm.value.name
-    // };
-    //this.challengeService.create(challenge)
+    if(this.challengeForm.status === "VALID"){
+      const challenge: Omit<Challenge, "id"> = {
+        idCreator: 5,
+        creationDate: new Date(),
+        description: <string>this.challengeForm.value.description,
+        duration: <number>this.challengeForm.value.duration,
+        interval: <number>this.challengeForm.value.interval,
+        name: <string>this.challengeForm.value.name
+      };
+      this.challengeService.create(challenge).then(data => console.log(data))
+    }
   }
 }
