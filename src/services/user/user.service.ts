@@ -13,7 +13,7 @@ export class UserService extends GenericService<User>{
 
   private _isLoggedIn = new Subject<boolean>();
 
-  constructor(private localstore: LocalstoreService<User>) {
+  constructor(private localstore: LocalstoreService<User>, private tokenLocalstore: LocalstoreService<string>) {
     super("user");
   }
 
@@ -49,13 +49,13 @@ export class UserService extends GenericService<User>{
       if (res.status != 200) {
         return res.status;
       }
-      let newUser = res.data;
-      if (!newUser) {
+      let data = res.data;
+      if (!data) {
         return false;
       }
-      this.localstore.set(newUser);
+      this.localstore.set("user",data.user);
+      this.tokenLocalstore.set("token",data.token);
       this._isLoggedIn.next(true);
-      console.log('create User : ', user);
       return true;
     }catch (e: any) {
       console.log(e)
@@ -68,7 +68,8 @@ export class UserService extends GenericService<User>{
     if (res.status != 200) {
       return false;
     }
-    this.localstore.set(res.data);
+    this.localstore.set("user",res.data.user);
+    this.tokenLocalstore.set("token",res.data.token);
     this._isLoggedIn.next(true);
     console.log('login User : ', user);
     return true;
@@ -76,6 +77,7 @@ export class UserService extends GenericService<User>{
 
   disconnect() {
     this.localstore.remove('user');
+    this.tokenLocalstore.remove('token')
     this._isLoggedIn.next(false);
   }
 }

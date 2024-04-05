@@ -14,8 +14,8 @@ export class LocalstoreService<T> {
     return JSON.parse(localStorage.getItem(key) as string);
   }
 
-  set(user: T) {
-    localStorage.setItem('user', JSON.stringify(user));
+  set(key: string,value: T) {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   remove(key: string) {
