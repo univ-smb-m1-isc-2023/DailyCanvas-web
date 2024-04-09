@@ -38,4 +38,8 @@ export class LoginComponent {
   changePage() {
     this.pageChange.emit(1);
   }
+
+  // signInWithGoogle() {
+  //   this.authService.login();
+  // }
 }

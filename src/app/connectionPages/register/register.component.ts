@@ -12,7 +12,7 @@ import {FormsModule} from "@angular/forms";
 })
 export class RegisterComponent {
   loading = false;
-  error = false;
+  error: string = "";
   userDetails = {
     username: '',
     email: '',
@@ -24,11 +24,25 @@ export class RegisterComponent {
 
   async register(form: any) {
     this.loading = true;
+    this.error = "";
     let res = await this.userService.register(this.userDetails);
-    if (!res) {
-      this.error = true
+    console.log(res)
+    if (typeof res === "number" || !res) {
+      if (!res){
+        this.error = "Erreur lors de la création de votre compte"
+      }else{
+        switch (res){
+          case 409:
+            this.error = "Un compte avec cet email existe déjà !"
+            break;
+          default:
+            this.error = "Erreur lors de la création de votre compte"
+            break;
+        }
+      }
     }
     this.loading = false;
+    console.log(this.error, this.loading)
   }
 
   changePage() {

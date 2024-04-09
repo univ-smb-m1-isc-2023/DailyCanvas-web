@@ -1,9 +1,15 @@
 import axios from "axios";
 import {API_URL} from "./utils";
+import {LocalstoreService} from "./localstore/localstore.service";
 
 export class GenericService<T> {
 
-    constructor(private url: string) {}
+    constructor(private url: string ) {
+      let localstore: LocalstoreService<string> = new LocalstoreService();
+      if (localstore.get("token") !== null){
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localstore.get('token')}`
+      }
+    }
 
     async getAll(): Promise<T[]> {
       const response = await axios.get<T[]>(`${API_URL}/${this.url}`);
