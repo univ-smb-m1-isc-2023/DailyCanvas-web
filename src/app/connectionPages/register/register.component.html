@@ -17,6 +17,9 @@
       <div class="w-full flex justify-center items-center">
         <a class="text-dark-lavender cursor-pointer" (click)="changePage()">Déjà un compte ? Connectez-vous</a>
       </div>
+      <div class="w-full flex justify-center">
+        <app-google-login (pageChange)="changePageEvent($event)"></app-google-login>
+      </div>
     </div>
   </div>
 </div>

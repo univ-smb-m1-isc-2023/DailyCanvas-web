@@ -41,6 +41,10 @@ export class LoginComponent {
     this.pageChange.emit(1);
   }
 
+  changePageEvent($event: number){
+    this.pageChange.emit($event)
+  }
+
   // signInWithGoogle() {
   //   this.authService.login();
   // }

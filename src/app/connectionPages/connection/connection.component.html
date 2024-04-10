@@ -1,5 +1,7 @@
 @if(page == 1){
   <app-register (pageChange)="changePage($event)"></app-register>
+} @else if (page == 2) {
+  <app-add-password-google></app-add-password-google>
 } @else {
   <app-login (pageChange)="changePage($event)"></app-login>
 }
