@@ -50,8 +50,4 @@ export class RegisterComponent {
   changePage() {
     this.pageChange.emit(2);
   }
-
-  changePageEvent($event: number){
-    this.pageChange.emit($event)
-  }
 }

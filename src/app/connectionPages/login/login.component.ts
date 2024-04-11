@@ -40,12 +40,4 @@ export class LoginComponent {
   changePage() {
     this.pageChange.emit(1);
   }
-
-  changePageEvent($event: number){
-    this.pageChange.emit($event)
-  }
-
-  // signInWithGoogle() {
-  //   this.authService.login();
-  // }
 }

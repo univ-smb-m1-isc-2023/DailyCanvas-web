@@ -16,8 +16,6 @@ export class GoogleLoginComponent {
   loggedIn: boolean = false;
   load: boolean = false;
 
-  @Output() pageChange = new EventEmitter<number>();
-
   constructor(private authService: SocialAuthService, private userService: UserService) { }
 
   async googleRegister(user: SocialUser){
@@ -27,14 +25,14 @@ export class GoogleLoginComponent {
       console.log("Erreur de connexion google !")
       return;
     }
-    //go to add password for google
-    this.pageChange.emit(2);
+    this.user = new SocialUser()
+    console.log("okkkkkkkkkk", this.user)
     this.load = false
   }
 
   ngOnInit() {
     this.authService.authState.subscribe((user) => {
-      console.log(user)
+      console.log("chooseUser")
       this.googleRegister(user);
       this.user = user;
       this.loggedIn = (user != null);
