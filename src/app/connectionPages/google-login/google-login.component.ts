@@ -25,12 +25,12 @@ export class GoogleLoginComponent {
       console.log("Erreur de connexion google !")
       return;
     }
-    this.user = new SocialUser()
     console.log("okkkkkkkkkk", this.user)
     this.load = false
   }
 
   ngOnInit() {
+    this.authService.signOut();
     this.authService.authState.subscribe((user) => {
       console.log("chooseUser")
       this.googleRegister(user);
