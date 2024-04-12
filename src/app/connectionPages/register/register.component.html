@@ -1,18 +1,24 @@
-<div class="flex justify-center items-center w-screen h-full bg-lavender">
+<div class="flex justify-center items-center w-screen h-full bg-slate-50">
   <div class="w-full flex justify-center items-center">
     <div class="w-1/3 flex flex-col">
       <form class="w-full flex flex-col" #userForm="ngForm" (ngSubmit)="register(userForm)">
-        <input class="rounded-3xl border border-dark-lavender p-3 m-3 form-control" type="text" name="username" placeholder="Nom d'utilisateur" [(ngModel)]="userDetails.username">
-        <input class="rounded-3xl border border-dark-lavender p-3 m-3 form-control" type="email" name="email" placeholder="Email" [(ngModel)]="userDetails.email">
-        <input class="rounded-3xl border border-dark-lavender p-3 m-3 form-control" type="password" name="password" placeholder="Mot de passe" [(ngModel)]="userDetails.password">
+        <input class="rounded-3xl border border-lavender p-3 m-3 form-control" type="text" name="username" placeholder="Nom d'utilisateur" [(ngModel)]="userDetails.username">
+        <input class="rounded-3xl border border-lavender p-3 m-3 form-control" type="email" name="email" placeholder="Email" [(ngModel)]="userDetails.email">
+        <input class="rounded-3xl border border-lavender p-3 m-3 form-control" type="password" name="password" placeholder="Mot de passe" [(ngModel)]="userDetails.password">
+        @if (error != "") {
+          <div class="text-red-500 flex justify-center">{{error}}</div>
+        }
         @if (loading){
           .  .  .
         } @else {
-          <input class="rounded-3xl bg-dark-lavender text-lavender p-3 m-3 cursor-pointer" type="submit" value="Créer mon compte">
+          <input class="rounded-3xl bg-lavender text-dark-lavender p-3 m-3 cursor-pointer" type="submit" value="Créer mon compte">
         }
       </form>
       <div class="w-full flex justify-center items-center">
         <a class="text-dark-lavender cursor-pointer" (click)="changePage()">Déjà un compte ? Connectez-vous</a>
+      </div>
+      <div class="w-full flex justify-center">
+        <app-google-login></app-google-login>
       </div>
     </div>
   </div>

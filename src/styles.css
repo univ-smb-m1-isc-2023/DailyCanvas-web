@@ -12,3 +12,9 @@
     src: url(/assets/font/Le_Jour_Script.woff2) format('woff2');
   }
 }
+
+@layer components {
+  .error {
+    @apply text-sm text-red-500;
+  }
+}
