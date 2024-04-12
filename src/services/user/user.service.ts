@@ -80,4 +80,15 @@ export class UserService extends GenericService<User>{
     this.tokenLocalstore.remove('token')
     this._isLoggedIn.next(false);
   }
+
+  async googleAuthRequest(options: {firstname: string, lastname: string, name: string, email: string}) {
+    let res = await axios.post(`${API_URL}/auth/googleregister`, options);
+    if (res.status != 200) {
+      return false;
+    }
+    this.localstore.set("user",res.data.user);
+    this.tokenLocalstore.set("token",res.data.token);
+    this._isLoggedIn.next(true);
+    return true;
+  }
 }

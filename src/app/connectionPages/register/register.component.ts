@@ -1,12 +1,14 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {UserService} from "../../../services/user/user.service";
 import {FormsModule} from "@angular/forms";
+import {GoogleLoginComponent} from "../google-login/google-login.component";
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [
-    FormsModule
-  ],
+    imports: [
+        FormsModule,
+        GoogleLoginComponent
+    ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })

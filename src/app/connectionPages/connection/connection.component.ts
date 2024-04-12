@@ -7,7 +7,7 @@ import {LoginComponent} from "../login/login.component";
   standalone: true,
   imports: [
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
   ],
   templateUrl: './connection.component.html',
   styleUrl: './connection.component.css'

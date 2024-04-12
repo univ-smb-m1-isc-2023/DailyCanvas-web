@@ -1,13 +1,15 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UserService} from "../../../services/user/user.service";
+import {GoogleLoginComponent} from "../google-login/google-login.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GoogleLoginComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -38,8 +40,4 @@ export class LoginComponent {
   changePage() {
     this.pageChange.emit(1);
   }
-
-  // signInWithGoogle() {
-  //   this.authService.login();
-  // }
 }
