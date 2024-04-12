@@ -3,7 +3,9 @@
   @if (loggedIn){
     <div class="h-full w-full flex">
       <app-nav class="w-1/4"></app-nav>
-      <router-outlet></router-outlet>
+      <div class="h-full w-full">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   } @else {
     <app-connection class="h-full"></app-connection>
