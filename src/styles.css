@@ -18,7 +18,7 @@
     @apply text-sm text-red-500;
   }
   .button-dc {
-    @apply rounded-3xl font-semibold bg-lavender text-dark-lavender p-3;
+    @apply rounded-3xl font-semibold bg-lavender text-dark-lavender p-3 transition-all ease-in-out duration-500 hover:bg-dark-lavender hover:text-light-lavender;
   }
   .input-w-icon {
     @apply text-dark-lavender rounded-full bg-white border border-lavender p-4 hover:cursor-pointer focus-within:ring-dark-lavender focus-within:ring focus-within:ring-opacity-70;
