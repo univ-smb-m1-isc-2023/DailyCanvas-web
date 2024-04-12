@@ -17,4 +17,13 @@
   .error {
     @apply text-sm text-red-500;
   }
+  .button-dc {
+    @apply rounded-3xl font-semibold bg-lavender text-dark-lavender p-3;
+  }
+  .input-w-icon {
+    @apply text-dark-lavender rounded-full bg-white border border-lavender p-4 hover:cursor-pointer focus-within:ring-dark-lavender focus-within:ring focus-within:ring-opacity-70;
+  }
+  .input-w-icon input {
+    @apply text-black hover:cursor-pointer focus:outline-none;
+  }
 }

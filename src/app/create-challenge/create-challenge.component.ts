@@ -3,7 +3,6 @@ import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/
 import {ChallengeService} from "../../services/challenge/challenge.service";
 import {type Challenge} from "../../model/challenge";
 import {NgIf} from "@angular/common";
-import {toNumbers} from "@angular/compiler-cli/src/version_helpers";
 
 @Component({
   selector: 'app-create-challenge',

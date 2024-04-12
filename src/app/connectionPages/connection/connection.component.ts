@@ -13,7 +13,7 @@ import {LoginComponent} from "../login/login.component";
   styleUrl: './connection.component.css'
 })
 export class ConnectionComponent {
-  page = 1;
+  page = 2;
 
   changePage($event: number) {
     this.page = $event;
