@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgFor} from "@angular/common";
-import {Challenge} from "../../model/challenge";
-import {ChallengeService} from "../../services/challenge/challenge.service";
+import {Challenge} from "../../../model/challenge";
+import {ChallengeService} from "../../../services/challenge/challenge.service";
 
 @Component({
   selector: 'app-find-challenge',

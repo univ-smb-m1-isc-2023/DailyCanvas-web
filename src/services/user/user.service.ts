@@ -29,18 +29,24 @@ export class UserService extends GenericService<User>{
     return res;
   }
 
-  getIsLoggedIn() {
-    if (this.localstore.get('user')!=null) {
-      //vérification de l'utilisateur//
+  async getIsLoggedIn() {
+    let valtoken = await this.validToken()
+    return this.localstore.get('user') != null && valtoken;
+  }
 
-      //-----------------------------//
-      this._isLoggedIn.next(true);
-      console.log('user localstore', this.localstore.get('user'));
-      return true;
-    }else {
-      this._isLoggedIn.next(false);
-      return false;
+  //get if localstore token is valid or no and remove it from localstore if not valid
+  async validToken(){
+    try {
+      let res = await axios.get(`${API_URL}/auth/`);
+      if (res.data == true) {
+        this._isLoggedIn.next(true);
+        console.log('user localstore', this.localstore.get('user'));
+        return true;
+      }
+    }catch (e){
     }
+    this.disconnect();
+    return false
   }
 
   async register(user : Omit<User, 'id'>): Promise<boolean | number> {

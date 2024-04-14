@@ -1,0 +1,8 @@
+<div>
+  @for (event of events; track event.id) {
+    <p>{{event.title}} le {{event.date.toString()}}</p>
+  }
+  @if(events?.length == 0 || events == undefined){
+    <p>Pas d'events</p>
+  }
+</div>
