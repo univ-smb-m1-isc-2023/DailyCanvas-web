@@ -37,6 +37,7 @@ export class UserService extends GenericService<User>{
   //get if localstore token is valid or no and remove it from localstore if not valid
   async validToken(){
     try {
+      if (this.localstore.get('token') == null)return false
       let res = await axios.get(`${API_URL}/auth/`);
       if (res.data == true) {
         this._isLoggedIn.next(true);
