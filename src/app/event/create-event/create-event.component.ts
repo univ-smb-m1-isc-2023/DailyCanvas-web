@@ -28,8 +28,12 @@ export class CreateEventComponent {
     }),
     date: new FormControl<Date>(new Date(),{
       validators: [Validators.required],
-      nonNullable: false
+      nonNullable: true
     }),
+    birthday: new FormControl<boolean>(false,{
+      validators: [Validators.required],
+      nonNullable: true
+    })
     })
 
   constructor(private userService: UserService, private eventService: EventService) {
@@ -48,7 +52,7 @@ export class CreateEventComponent {
         title: <string>this.eventForm.value.title,
         description: <string>this.eventForm.value.description,
         date: <Date>this.eventForm.value.date,
-        birthday: false
+        birthday: <boolean>this.eventForm.value.birthday
       };
       this.eventService.create(event).then(() => this.eventForm.reset())
     } else {
