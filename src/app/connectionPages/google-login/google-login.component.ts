@@ -25,7 +25,6 @@ export class GoogleLoginComponent {
       console.log("Erreur de connexion google !")
       return;
     }
-    console.log("okkkkkkkkkk", this.user)
     this.load = false
   }
 

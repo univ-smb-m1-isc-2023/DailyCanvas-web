@@ -44,7 +44,7 @@ export class CreateEventComponent {
         return
       }
       const event: Omit<Event, "id"> = {
-        idUser:id,
+        user_id:id,
         title: <string>this.eventForm.value.title,
         description: <string>this.eventForm.value.description,
         date: <Date>this.eventForm.value.date,

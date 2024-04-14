@@ -22,26 +22,11 @@
     </div>
   </div>
   <div class="overflow-auto h-full p-5 grow">
-    <!-- foreach event of user -->
-    <div class="flex border border-lavender rounded-3xl mb-2 p-2">
-      <p class="pr-5"> 01/10/2002 </p>
-      <p> Rendez-vous chez mamie bertrand</p>
-    </div>
-    <div class="flex border border-lavender rounded-3xl  p-2 mb-2">
-      <p class="pr-5"> 01/10/2002 </p>
-      <p> Rendez-vous chez mamie bertrand</p>
-    </div>
-    <div class="flex border border-lavender rounded-3xl  p-2 mb-2">
-      <p class="pr-5"> 01/10/2002 </p>
-      <p> Rendez-vous chez mamie bertrand</p>
-    </div>
-    <div class="flex border border-lavender rounded-3xl  p-2 mb-2">
-      <p class="pr-5"> 01/10/2002 </p>
-      <p> Rendez-vous chez mamie bertrand</p>
-    </div>
-    <div class="flex border border-lavender rounded-3xl  p-2 mb-2">
-      <p class="pr-5"> 01/10/2002 </p>
-      <p> Rendez-vous chez mamie bertrand</p>
-    </div>
+    @for (event of events; track event.id){
+      <div class="flex border border-lavender rounded-3xl mb-2 p-2">
+        <p class="pr-5"> {{getStringDate(event.date)}} </p>
+        <p> {{event.title}}</p>
+      </div>
+    }
   </div>
 </div>
