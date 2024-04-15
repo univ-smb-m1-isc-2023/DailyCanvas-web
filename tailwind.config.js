@@ -13,6 +13,9 @@ module.exports = {
       },
       fontFamily: {
         'title': ['Le Jour Script'],
+      },
+      screens: {
+        'tall': { 'raw': '(min-height: 800px)' },
       }
     },
   },

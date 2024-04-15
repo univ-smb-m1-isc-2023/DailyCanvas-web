@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import {RegisterComponent} from "../register/register.component";
 import {LoginComponent} from "../login/login.component";
+import {GoogleLoginComponent} from "../google-login/google-login.component";
 
 @Component({
   selector: 'app-connection',
   standalone: true,
-  imports: [
-    RegisterComponent,
-    LoginComponent,
-  ],
+    imports: [
+        RegisterComponent,
+        LoginComponent,
+        GoogleLoginComponent,
+    ],
   templateUrl: './connection.component.html',
   styleUrl: './connection.component.css'
 })
