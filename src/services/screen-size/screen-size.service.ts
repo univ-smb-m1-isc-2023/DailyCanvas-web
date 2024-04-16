@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {isMobileDevice} from "../utils";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +22,16 @@ export class ScreenSizeService {
   }
 
   isSmallDevice(){
-    return isMobileDevice() || this.size < 640;
+    return this.isMobileDevice() || this.size < 640;
+  }
+
+  isMobileDevice() {
+    return (navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/webOS/i)
+      || navigator.userAgent.match(/Android/i)
+      || navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPod/i)
+      || navigator.userAgent.match(/BlackBerry/i)
+      || navigator.userAgent.match(/Windows Phone/i));
   }
 }

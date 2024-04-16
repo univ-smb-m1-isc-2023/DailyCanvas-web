@@ -24,7 +24,7 @@ const MODULES =[
 })
 export class AppComponent implements OnInit{
   loggedIn: boolean = false;
-  title = 'DailyCanvas-web';
+  title = 'Daily Canvas';
 
   constructor(private userService: UserService) {
   }
