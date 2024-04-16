@@ -6,6 +6,7 @@ import { provideServiceWorker } from '@angular/service-worker';
 import {provideOAuthClient} from "angular-oauth2-oidc";
 import {provideHttpClient} from "@angular/common/http";
 import {GoogleLoginProvider, SocialAuthServiceConfig} from "@abacritt/angularx-social-login";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,6 +33,6 @@ export const appConfig: ApplicationConfig = {
           console.error(err);
         }
       } as SocialAuthServiceConfig,
-    }
+    }, provideAnimationsAsync()
   ],
 };

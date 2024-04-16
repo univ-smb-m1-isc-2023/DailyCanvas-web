@@ -1,17 +1,29 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
-import type {Challenge} from "../../../model/challenge";
 import {UserService} from "../../../services/user/user.service";
 import {Event} from "../../../model/event";
 import {EventService} from "../../../services/event/event.service";
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MAT_DATE_LOCALE, provideNativeDateAdapter} from '@angular/material/core';
+
+
 
 @Component({
   selector: 'app-create-event',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule
+  ],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+    provideNativeDateAdapter()
   ],
   templateUrl: './create-event.component.html',
   styleUrl: './create-event.component.css'
@@ -26,10 +38,7 @@ export class CreateEventComponent {
       validators: [Validators.required],
       nonNullable: false
     }),
-    date: new FormControl<Date>(new Date(),{
-      validators: [Validators.required],
-      nonNullable: true
-    }),
+    date: new FormControl<Date>(new Date()),
     birthday: new FormControl<boolean>(false,{
       validators: [Validators.required],
       nonNullable: true
@@ -37,6 +46,7 @@ export class CreateEventComponent {
     })
 
   constructor(private userService: UserService, private eventService: EventService) {
+
   }
 
   createEvent(){

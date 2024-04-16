@@ -17,6 +17,14 @@ export class UserService extends GenericService<User>{
     super("user");
   }
 
+  setAxiosToken(){
+    axios.defaults.headers.common['Authorization'] = `Bearer ${this.localstore.get('token')}`
+  }
+
+  removeAxiosToken(){
+    delete axios.defaults.headers.common['Authorization'];
+  }
+
   get isLoggedIn() {
     return this._isLoggedIn.asObservable();
   }
@@ -35,6 +43,7 @@ export class UserService extends GenericService<User>{
   }
 
   //get if localstore token is valid or no and remove it from localstore if not valid
+  //if valid, set it in axios header else remove it
   async validToken(){
     try {
       if (this.localstore.get('token') == null)return false
@@ -84,6 +93,7 @@ export class UserService extends GenericService<User>{
 
   disconnect() {
     this.localstore.remove('user');
+    this.removeAxiosToken()
     this.tokenLocalstore.remove('token')
     this._isLoggedIn.next(false);
   }
