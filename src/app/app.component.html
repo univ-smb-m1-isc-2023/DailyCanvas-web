@@ -1,9 +1,11 @@
 <div class="h-screen w-screen flex flex-col">
   <app-header/>
   @if (loggedIn){
-    <div class="h-full w-full flex">
-      <app-nav class="w-1/4"></app-nav>
-      <router-outlet></router-outlet>
+    <div class="h-full w-full flex flex-col sm:flex-row">
+      <app-nav class="w-full sm:w-1/4 basis-1/6 order-last sm:order-first"></app-nav>
+      <div class="grow">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   } @else {
     <app-connection class="h-full"></app-connection>

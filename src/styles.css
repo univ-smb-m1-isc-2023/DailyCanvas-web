@@ -26,4 +26,13 @@
   .input-w-icon input {
     @apply text-black hover:cursor-pointer focus:outline-none;
   }
+  .phone-nav-icon {
+    @apply h-10 w-10 cursor-pointer rounded-full fill-none;
+  }
+  .phone-nav-icon-big {
+    @apply h-20 w-20 cursor-pointer bg-green rounded-full fill-none p-4 text-light-lavender -mt-12 shadow-2xl;
+  }
+  .phone-nav-icon-selected {
+    @apply fill-light-green;
+  }
 }
