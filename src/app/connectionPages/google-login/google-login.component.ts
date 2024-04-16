@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GoogleSigninButtonModule, SocialAuthService, SocialUser} from "@abacritt/angularx-social-login";
 import {UserService} from "../../../services/user/user.service";
 
@@ -11,7 +11,7 @@ import {UserService} from "../../../services/user/user.service";
   templateUrl: './google-login.component.html',
   styleUrl: './google-login.component.css'
 })
-export class GoogleLoginComponent {
+export class GoogleLoginComponent implements OnInit{
   user: SocialUser = new SocialUser();
   loggedIn: boolean = false;
   load: boolean = false;
@@ -20,19 +20,16 @@ export class GoogleLoginComponent {
 
   async googleRegister(user: SocialUser){
     this.load = true
-    let res = await this.userService.googleAuthRequest({name: user.name, email: user.email, firstname : user.firstName, lastname: user.lastName})
+    const res = await this.userService.googleAuthRequest({name: user.name, email: user.email, firstname : user.firstName, lastname: user.lastName})
     if (typeof res == "number" && res != 200){
-      console.log("Erreur de connexion google !")
       return;
     }
-    console.log("okkkkkkkkkk", this.user)
     this.load = false
   }
 
   ngOnInit() {
     this.authService.signOut();
     this.authService.authState.subscribe((user) => {
-      console.log("chooseUser")
       this.googleRegister(user);
       this.user = user;
       this.loggedIn = (user != null);

@@ -5,6 +5,7 @@ import {User} from "../../model/user";
 import {GenericService} from "../GenericService";
 import {Subject} from "rxjs";
 import {LocalstoreService} from "../localstore/localstore.service";
+import {type ErrorType} from "../../model/error-type";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,6 @@ export class UserService extends GenericService<User>{
 
       //-----------------------------//
       this._isLoggedIn.next(true);
-      console.log('user localstore', this.localstore.get('user'));
       return true;
     }else {
       this._isLoggedIn.next(false);
@@ -43,13 +43,13 @@ export class UserService extends GenericService<User>{
     }
   }
 
-  async register(user : Omit<User, 'id'>): Promise<boolean | number> {
+  async register(user : Omit<User, 'id'>): Promise<boolean | ErrorType> {
     try {
-      let res = await axios.post(`${API_URL}/auth/register`, user);
+      const res = await axios.post(`${API_URL}/auth/register`, user);
       if (res.status != 200) {
-        return res.status;
+        return {status: res.status, message: res.statusText};
       }
-      let data = res.data;
+      const data = res.data;
       if (!data) {
         return false;
       }
@@ -58,8 +58,7 @@ export class UserService extends GenericService<User>{
       this._isLoggedIn.next(true);
       return true;
     }catch (e: any) {
-      console.log(e)
-      return e.response.status;
+      return {status: e.response.status, message: e.response.data};
     }
   }
 
@@ -71,7 +70,6 @@ export class UserService extends GenericService<User>{
     this.localstore.set("user",res.data.user);
     this.tokenLocalstore.set("token",res.data.token);
     this._isLoggedIn.next(true);
-    console.log('login User : ', user);
     return true;
   }
 

@@ -44,7 +44,6 @@ export class LoginComponent {
         email: <string>this.loginForm.value.email,
         password: <string>this.loginForm.value.password
       };
-      console.log(userDetails)
       await this.userService.login(userDetails).catch(() => this.infosDontMatch = true);
     } else {
       this.submittedAndInvalid = true;
