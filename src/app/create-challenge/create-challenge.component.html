@@ -57,6 +57,9 @@
       <p class="w-10 h-10 rounded-full bg-lavender">1er reponse</p>
       <p>+</p>
       <p>réponse supprimable etc</p>
+      <p *ngFor="let emoji of emoji_list">
+        <app-icon [pathData]="emoji.value"></app-icon>
+      </p>
     </div>
 
     <button type="submit" class="button-dc col-span-2 w-3/4 sm:w-1/4 place-self-center">C'est parti !</button>

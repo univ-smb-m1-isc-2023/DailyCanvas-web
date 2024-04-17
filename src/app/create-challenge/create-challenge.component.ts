@@ -1,9 +1,12 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ChallengeService} from "../../services/challenge/challenge.service";
 import {type Challenge} from "../../model/challenge";
 import {NgFor, NgIf} from "@angular/common";
 import {UserService} from "../../services/user/user.service";
+import {EntryTypeService} from "../../services/entry-type/entry-type.service";
+import {type EntryType} from "../../model/entry-type";
+import {IconComponent} from "../elements/icon/icon.component";
 
 @Component({
   selector: 'app-create-challenge',
@@ -11,12 +14,14 @@ import {UserService} from "../../services/user/user.service";
   imports: [
     ReactiveFormsModule,
     NgIf,
-    NgFor
+    NgFor,
+    IconComponent
   ],
   templateUrl: './create-challenge.component.html',
   styleUrl: './create-challenge.component.css'
 })
-export class CreateChallengeComponent {
+export class CreateChallengeComponent implements OnInit {
+  emoji_list!: EntryType[];
   duration_units = [
     {name: "une durée indéterminée"},
     {name: "jours"},
@@ -32,6 +37,8 @@ export class CreateChallengeComponent {
     {name: "minutes"},
     {name: "heures"}
   ];
+
+  entry_types: EntryType[] = [];
   submittedAndInvalid: boolean = false;
   challengeForm = new FormGroup({
     name: new FormControl<string>('', {
@@ -59,8 +66,10 @@ export class CreateChallengeComponent {
       nonNullable: true
     })
   });
-  constructor(private challengeService: ChallengeService, private userService: UserService) { }
-
+  constructor(private challengeService: ChallengeService, private userService: UserService, private entryTypesService: EntryTypeService) { }
+  async ngOnInit(): Promise<void> {
+    this.emoji_list = await this.entryTypesService.getEmojis();
+  }
   createChallenge(){
     console.log(this.challengeForm)
     if(this.challengeForm.value.duration_unit === this.duration_units[0]){
