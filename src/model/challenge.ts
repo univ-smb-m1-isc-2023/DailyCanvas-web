@@ -1,3 +1,5 @@
+import {type Entry} from "./entry";
+
 export interface Challenge {
   id: number;
   idCreator: number;
@@ -6,4 +8,5 @@ export interface Challenge {
   duration: number;
   interval: number;
   creationDate: Date;
+  entryTypes: Entry[];
 }

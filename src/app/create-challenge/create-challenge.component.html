@@ -1,6 +1,6 @@
-<div class="relative h-full z-0 mt-0 pt-2 sm:pt-12 flex flex-col justify-start items-center gap-8 sm:gap-16 ">
+<div class="relative h-full z-0 mt-0 pt-2 sm:pt-12 flex flex-col justify-start items-center gap-8 sm:gap-16">
   <h1 class="text-dark-lavender text-2xl sm:text-4xl text-center font-light sm:font-thin">Créer un nouveau challenge</h1>
-  <form [formGroup]="challengeForm" (ngSubmit)="createChallenge()" class="w-11/12 sm:w-2/3 grid grid-cols-2 gap-3 pb-12">
+  <form [formGroup]="challengeForm" (ngSubmit)="createChallenge()" class="w-11/12 sm:w-4/5 grid grid-cols-2 gap-3 pb-12">
     <label class="input-w-icon rounded-3xl col-span-2 sm:col-span-1">
       Je veux réussir à <input id="name" type="text" formControlName="name" class="input-underline">.
       <div *ngIf="challengeForm.controls?.name?.dirty || challengeForm.controls?.name?.touched || submittedAndInvalid" class="error">
@@ -16,7 +16,12 @@
     </label>
 
     <label class="input-w-icon rounded-3xl col-span-2 sm:col-span-1">
-      Je veux essayer de relever ce défi en <input id="duration" type="text" formControlName="duration" class="number input-underline"> jour.
+      Je veux relever ce défi pendant <input *ngIf="challengeForm.value.duration_unit !== duration_units[0]" [required]="challengeForm.value.duration_unit !== duration_units[0]" id="duration" type="text" formControlName="duration" class="number input-underline">
+      <select class="select-dc rounded-3xl p-2" formControlName="duration_unit">
+        <option *ngFor="let unit of duration_units" [ngValue]="unit">
+          {{ unit.name }}
+        </option>
+      </select>.
       <div *ngIf="challengeForm.controls?.duration?.dirty || challengeForm.controls?.duration?.touched || submittedAndInvalid" class="error">
         <p *ngIf="challengeForm?.controls?.duration?.errors?.['required']">Le temps du challenge est obligatoire.</p>
         <p *ngIf="challengeForm?.controls?.duration?.errors?.['pattern']">Le temps est un nombre, qui peut être à virgule (12.3).</p>
@@ -24,7 +29,13 @@
     </label>
 
     <label class="input-w-icon rounded-3xl col-span-2 sm:col-span-1">
-      En le faisant au moins tous les <input id="interval" type="text" formControlName="interval" class="number input-underline"> jour.
+      En le faisant au moins tous les <input id="interval" type="text" formControlName="interval" class="number input-underline">
+      <select class="select-dc rounded-3xl p-2" formControlName="interval_unit">
+        <option *ngFor="let unit of interval_units" [ngValue]="unit">
+          {{ unit.name }}
+        </option>
+      </select>
+      .
       <div *ngIf="challengeForm.controls?.interval?.dirty || challengeForm.controls?.interval?.touched || submittedAndInvalid" class="error">
         <p *ngIf="challengeForm?.controls?.interval?.errors?.['required']">L'intervalle entre deux entrées du challenge est obligatoire.</p>
         <p *ngIf="challengeForm?.controls?.interval?.errors?.['pattern']">L'intervalle est un nombre, qui peut être à virgule (12.3).</p>
