@@ -35,6 +35,9 @@
   .select-dc {
     @apply text-dark-lavender rounded-full bg-white border border-lavender p-4 hover:cursor-pointer focus-within:ring-dark-lavender focus-within:ring focus-within:ring-opacity-70;
   }
+  .select-dc option {
+    @apply rounded;
+  }
   .phone-nav-icon {
     @apply h-10 w-10 cursor-pointer rounded-full fill-none;
   }
@@ -43,5 +46,11 @@
   }
   .phone-nav-icon-selected {
     @apply fill-light-green;
+  }
+  .flex-fill {
+    flex: 0 1 auto;
+  }
+  .flex-fixed {
+    flex: 0 0 auto;
   }
 }

@@ -48,7 +48,10 @@ export class CreateChallengeComponent {
         interval: Number(this.challengeForm.value.interval),
         name: <string>this.challengeForm.value.name
       };
-      this.challengeService.create(challenge).then(() => this.challengeForm.reset())
+      this.challengeService.create(challenge).then((challenge: Challenge) => {
+        this.challengeForm.reset()
+        console.log(challenge);
+      })
     } else {
       this.submittedAndInvalid = true;
     }

@@ -1,6 +1,6 @@
-<div class="relative z-0 h-fit sm:h-4/5 mt-0 pt-2 flex flex-col justify-center items-center gap-8 sm:tall:gap-16 ">
+<div class="relative h-full z-0 mt-0 pt-2 sm:pt-12 flex flex-col justify-start items-center gap-8 sm:gap-16 ">
   <h1 class="text-dark-lavender text-2xl sm:text-4xl text-center font-light sm:font-thin">Créer un nouveau challenge</h1>
-  <form [formGroup]="challengeForm" (ngSubmit)="createChallenge()" class="w-11/12 sm:w-2/3 grid grid-cols-2 gap-3">
+  <form [formGroup]="challengeForm" (ngSubmit)="createChallenge()" class="w-11/12 sm:w-2/3 grid grid-cols-2 gap-3 pb-12">
     <label class="input-w-icon rounded-3xl col-span-2 sm:col-span-1">
       Je veux réussir à <input id="name" type="text" formControlName="name" class="input-underline">.
       <div *ngIf="challengeForm.controls?.name?.dirty || challengeForm.controls?.name?.touched || submittedAndInvalid" class="error">
@@ -32,10 +32,12 @@
     </label>
 
     <div>
-      <select class="select-dc rounded-3xl w-fit">
-        <option disabled selected>Who shot first?</option>
-        <option>Han Solo</option>
-        <option>Greedo</option>
+      <select class="select-dc rounded-3xl w-full">
+        <option disabled selected>Quel type d'entrée correspond à ce challenge ?</option>
+        <option>Texte</option>
+        <option>Nombre</option>
+        <option>Emojis</option>
+        <option>Emojis personnalisées</option>
       </select>
     </div>
 
