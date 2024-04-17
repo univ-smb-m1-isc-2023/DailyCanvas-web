@@ -1,7 +1,7 @@
 <div class="h-screen w-screen max-h-screen max-w-screen flex flex-col">
   <app-header class="flex-none"/>
   @if (loggedIn){
-    <div class="absolute sm:static h-full flex flex-col sm:flex-row">
+    <div class="absolute sm:static h-full w-full flex flex-col sm:flex-row">
       <app-nav class="basis-1/6 sm:grow-0 flex-fixed sm:flex-auto order-last sm:order-first z-20"></app-nav>
       <div class="basis-5/6 flex-fill sm:flex-auto pt-20 sm:pt-0 overflow-y-auto">
         <router-outlet></router-outlet>
