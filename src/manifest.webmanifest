@@ -1,7 +1,7 @@
 {
   "name": "Daily Canvas",
-  "short_name": "DC",
-  "theme_color": "#e3dae7",
+  "short_name": "Daily Canvas",
+  "theme_color": "#6d507a",
   "background_color": "#f6f3f7",
   "display": "standalone",
   "scope": "./",
