@@ -24,7 +24,16 @@
     @apply text-dark-lavender rounded-full bg-white border border-lavender p-4 hover:cursor-pointer focus-within:ring-dark-lavender focus-within:ring focus-within:ring-opacity-70;
   }
   .input-w-icon input {
-    @apply text-black hover:cursor-pointer focus:outline-none;
+    @apply bg-white text-black hover:cursor-pointer focus:outline-none;
+  }
+  .input-w-icon .input-underline {
+    @apply border-b border-lavender;
+  }
+  .input-w-icon .number {
+    @apply w-6;
+  }
+  .select-dc {
+    @apply text-dark-lavender rounded-full bg-white border border-lavender p-4 hover:cursor-pointer focus-within:ring-dark-lavender focus-within:ring focus-within:ring-opacity-70;
   }
   .phone-nav-icon {
     @apply h-10 w-10 cursor-pointer rounded-full fill-none;

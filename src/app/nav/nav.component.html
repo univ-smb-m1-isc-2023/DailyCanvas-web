@@ -1,4 +1,4 @@
-<div class="h-screen z-20 -mt-20 py-20 bg-light-green shadow-lg hidden sm:block">
+<div class="h-screen -mt-20 py-20 bg-light-green shadow-lg hidden sm:block">
   <div class="h-full p-5 flex flex-col text-dark-green gap-10">
     <div *ngFor="let element of elements">
       <div class="flex">
@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<div class="w-full h-full z-50 bg-light-lavender border-t-2 border-light-green shadow-xl block sm:hidden">
+<div class="w-full h-full border-t-2 border-light-green shadow-xl block sm:hidden">
   <div class="w-full h-full p-5 flex justify-around text-dark-green gap-6">
       <p [routerLink]="PROGRESS.children[0].link" class="phone-nav-icon" [ngClass]="{'phone-nav-icon-selected': isCurrentURL(PROGRESS.children[0].link)}">
         <app-icon [pathData]="PROGRESS.icon"></app-icon>

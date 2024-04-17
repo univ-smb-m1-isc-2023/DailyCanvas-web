@@ -14,7 +14,7 @@ import {NgIf} from "@angular/common";
   templateUrl: './create-challenge.component.html',
   styleUrl: './create-challenge.component.css'
 })
-export class CreateChallengeComponent implements AfterViewInit{
+export class CreateChallengeComponent {
   submittedAndInvalid: boolean = false;
   challengeForm = new FormGroup({
     name: new FormControl<string>('', {
@@ -34,11 +34,7 @@ export class CreateChallengeComponent implements AfterViewInit{
       nonNullable: true
     }),
   });
-  constructor(private challengeService: ChallengeService,private renderer: Renderer2, private elRef: ElementRef) { }
-  ngAfterViewInit(): void {
-    const hostElement = this.elRef.nativeElement;
-    this.renderer.setStyle(hostElement, 'flex-grow', '1');
-  }
+  constructor(private challengeService: ChallengeService) { }
 
   createChallenge(){
     console.log(this.challengeForm)
