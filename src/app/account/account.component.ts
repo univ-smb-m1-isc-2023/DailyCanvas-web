@@ -18,4 +18,7 @@ export class AccountComponent implements OnInit{
     this.user = this.userService.getLocalUser()
   }
 
+  disconnect() {
+    this.userService.disconnect();
+  }
 }
