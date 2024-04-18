@@ -96,8 +96,6 @@ export class CreateChallengeComponent implements OnInit {
     ]
   }
   createChallenge(){
-    console.log(this.getEntryTypesSelected())
-    console.log(this.challengeForm)
     if(this.challengeForm.value.duration_unit === this.duration_units[0]){
       this.challengeForm.value.duration = 0;
     }
@@ -114,8 +112,8 @@ export class CreateChallengeComponent implements OnInit {
         entryTypes: entryTypes
       };
       this.challengeService.create(challenge).then((challenge: Challenge) => {
-        this.challengeForm.reset()
-        console.log(challenge);
+        this.challengeForm.reset();
+        console.log(challenge); 
       })
     } else {
       this.submittedAndInvalid = true;
