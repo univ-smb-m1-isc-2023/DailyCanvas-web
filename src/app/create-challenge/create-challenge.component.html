@@ -16,7 +16,7 @@
     </label>
 
     <label class="input-w-icon rounded-3xl col-span-2 sm:col-span-1">
-      Je veux relever ce défi pendant <input *ngIf="challengeForm.value.duration_unit !== duration_units[0]" [required]="challengeForm.value.duration_unit !== duration_units[0]" id="duration" type="text" formControlName="duration" class="number input-underline">
+      Je veux relever ce défi pendant <input *ngIf="challengeForm.value.duration_unit !== duration_units[0]" [required]="challengeForm.value.duration_unit !== duration_units[0]" id="duration" type="text" formControlName="duration" class="number input-underline mx-1">
       <select class="select-dc rounded-3xl p-2" formControlName="duration_unit">
         <option *ngFor="let unit of duration_units" [ngValue]="unit">
           {{ unit.name }}
@@ -29,7 +29,7 @@
     </label>
 
     <label class="input-w-icon rounded-3xl col-span-2 sm:col-span-1">
-      En le faisant au moins tous les <input id="interval" type="text" formControlName="interval" class="number input-underline">
+      En le faisant au moins tous les <input id="interval" type="text" formControlName="interval" class="number input-underline mx-1">
       <select class="select-dc rounded-3xl p-2" formControlName="interval_unit">
         <option *ngFor="let unit of interval_units" [ngValue]="unit">
           {{ unit.name }}
@@ -53,12 +53,12 @@
 
     <label *ngIf="challengeForm.value.entry_type === entry_types[1]" class="input-w-icon rounded-3xl col-span-2 sm:col-span-1">
       Exemple :
-      <input type="text" class="input-underline" placeholder="Tout type de texte..">
+      <input disabled type="text" class="input-underline w-full" placeholder="Expliquer comment s'est passé le challenge aujourd'hui">
     </label>
 
     <label *ngIf="challengeForm.value.entry_type === entry_types[2]" class="input-w-icon rounded-3xl col-span-2 sm:col-span-1">
       Exemple :
-      <input type="text" class="number input-underline" placeholder="12">
+      <input disabled type="text" class="number input-underline" placeholder="12">
     </label>
 
     <div *ngIf="challengeForm.value.entry_type === entry_types[3]" class="w-full emoji-selector rounded-3xl col-span-2 sm:col-span-1">

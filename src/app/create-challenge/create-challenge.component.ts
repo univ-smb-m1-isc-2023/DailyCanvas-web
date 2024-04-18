@@ -42,7 +42,7 @@ export class CreateChallengeComponent implements OnInit {
   ];
 
   entry_types = [
-    {name :"Quel type d'entrée correspond à ce challenge ?", disabled: true},
+    {name :"Quel type de réponse voulez-vous utiliser ?", disabled: true},
     {name: "Texte"},
     {name: "Nombre"},
     {name: "Émojis"},
@@ -60,11 +60,11 @@ export class CreateChallengeComponent implements OnInit {
       validators: [Validators.required],
       nonNullable: true
     }),
-    duration: new FormControl<number | null>(null, {
+    duration: new FormControl<number | null>(1  , {
       validators: [Validators.pattern(/^\d*\.?\d+$/)],
       nonNullable: false
     }),
-    interval: new FormControl<number | null>(null, {
+    interval: new FormControl<number | null>(1, {
       validators: [Validators.required, Validators.pattern(/^\d*\.?\d+$/)],
       nonNullable: true
     }),
