@@ -1,6 +1,6 @@
 <div class="relative sm:h-full">
   <div class="relative p-10 pb-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    <span *ngIf="isLoading" class="loading loading-spinner loading-lg text-dark-lavender col-span-full"></span>
+    <span *ngIf="isLoading" class="loading loading-spinner loading-lg text-dark-lavender col-span-full ml-auto mr-auto"></span>
     <div  *ngFor="let challenge of challenges" class="relative">
       <app-challenge [challenge]="challenge" class="relative hover:cursor-pointer"></app-challenge>
       <div class="absolute -top-2 -right-2 fill-light-green text-dark-lavender">
