@@ -13,9 +13,9 @@ export class EntryTypeService extends GenericService<EntryType>{
     super('entry-type');
   }
 
-  async getEmojis(): Promise<any> {
-    const response = await axios.get<EntryType[]>(`${API_URL}/${this.url}/emojis`);
+  async getEmojis(): Promise<EntryType[]> {
+    const response = await axios.get(`${API_URL}/${this.url}/emojis`);
     return response.data;
   }
-  
+
 }

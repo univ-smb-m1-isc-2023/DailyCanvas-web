@@ -32,6 +32,22 @@
   .input-w-icon .number {
     @apply w-6;
   }
+  .div-selector {
+    @apply text-dark-lavender rounded-full bg-white border border-lavender p-4;
+  }
+  .emoji-selector {
+    @apply flex justify-evenly rounded-full bg-white border border-lavender p-4 focus-within:ring-dark-lavender focus-within:ring focus-within:ring-opacity-70;
+  }
+  .emoji-button {
+    @apply w-12 text-lavender hover:cursor-pointer;
+  }
+  .emoji-button svg{
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .emoji-button-selected {
+    @apply text-dark-lavender;
+  }
   .select-dc {
     @apply text-dark-lavender rounded-full bg-white border border-lavender p-4 hover:cursor-pointer focus-within:ring-dark-lavender focus-within:ring focus-within:ring-opacity-70;
   }

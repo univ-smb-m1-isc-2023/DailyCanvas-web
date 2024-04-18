@@ -1,4 +1,4 @@
-import {type Entry} from "./entry";
+import {EntryType} from "./entry-type";
 
 export interface Challenge {
   id: number;
@@ -8,5 +8,5 @@ export interface Challenge {
   duration: number;
   interval: number;
   creationDate: Date;
-  entryTypes: Entry[];
+  entryTypes: EntryType[];
 }

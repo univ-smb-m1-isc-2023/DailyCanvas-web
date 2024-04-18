@@ -1,4 +1,4 @@
-<div class="relative h-full z-0 mt-0 pt-2 sm:pt-12 flex flex-col justify-start items-center gap-8 sm:gap-16">
+<div class="relative h-full z-0 mt-0 pt-2 sm:pt-12 flex flex-col justify-start items-center gap-8 sm:tall:gap-16">
   <h1 class="text-dark-lavender text-2xl sm:text-4xl text-center font-light sm:font-thin">Créer un nouveau challenge</h1>
   <form [formGroup]="challengeForm" (ngSubmit)="createChallenge()" class="w-11/12 sm:w-4/5 grid grid-cols-2 gap-3 pb-12">
     <label class="input-w-icon rounded-3xl col-span-2 sm:col-span-1">
@@ -42,24 +42,39 @@
       </div>
     </label>
 
-    <div>
-      <select class="select-dc rounded-3xl w-full">
-        <option disabled selected>Quel type d'entrée correspond à ce challenge ?</option>
-        <option>Texte</option>
-        <option>Nombre</option>
-        <option>Emojis</option>
-        <option>Emojis personnalisées</option>
+    <div class="col-span-2 sm:col-span-1">
+      <select class="select-dc rounded-3xl w-full" formControlName="entry_type" (change)="exemple_emojis_select = undefined">
+        <option *ngFor="let entry of entry_types" [ngValue]="entry" [disabled]="entry.disabled ?? false">{{entry.name}}</option>
       </select>
+      <div *ngIf="entryTypeErrors.length !== 0" class="error px-3">
+        <p *ngFor="let error of entryTypeErrors" class="pb-1 last:pb-0">{{error}}</p>
+      </div>
     </div>
 
-    <div>
-      <p>entry type</p>
-      <p class="w-10 h-10 rounded-full bg-lavender">1er reponse</p>
-      <p>+</p>
-      <p>réponse supprimable etc</p>
-      <p *ngFor="let emoji of emoji_list">
-        <app-icon [pathData]="emoji.value"></app-icon>
-      </p>
+    <label *ngIf="challengeForm.value.entry_type === entry_types[1]" class="input-w-icon rounded-3xl col-span-2 sm:col-span-1">
+      Exemple :
+      <input type="text" class="input-underline" placeholder="Tout type de texte..">
+    </label>
+
+    <label *ngIf="challengeForm.value.entry_type === entry_types[2]" class="input-w-icon rounded-3xl col-span-2 sm:col-span-1">
+      Exemple :
+      <input type="text" class="number input-underline" placeholder="12">
+    </label>
+
+    <div *ngIf="challengeForm.value.entry_type === entry_types[3]" class="w-full emoji-selector rounded-3xl col-span-2 sm:col-span-1">
+        <app-icon *ngFor="let emoji of emojis_basic" (click)="updateEmojisUnique(emoji)" [pathData]="emoji.value" [ngClass]="{'emoji-button-selected': exemple_emojis_select === emoji}" class="emoji-button"></app-icon>
+    </div>
+
+    <div *ngIf="challengeForm.value.entry_type === entry_types[4]" class="w-full max-w-full emoji-selector rounded-3xl col-span-2 sm:col-span-1">
+      <app-icon *ngFor="let emoji of this.challengeForm.value.emojis" (click)="updateEmojisUnique(emoji)" [pathData]="emoji.value" [ngClass]="{'emoji-button-selected': exemple_emojis_select === emoji}" class="emoji-button"></app-icon>
+    </div>
+
+
+    <div *ngIf="challengeForm.value.entry_type === entry_types[4]" class="w-full div-selector rounded-3xl col-span-2 sm:col-span-1">
+      <p class="pb-2">Choisisez les émojis :</p>
+      <div class="w-full grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-10 place-items-center">
+        <app-icon *ngFor="let emoji of emojis" (click)="updateEmojis(emoji)" [pathData]="emoji.value" [ngClass]="{'emoji-button-selected': emojiSelected(emoji)}" class="emoji-button"></app-icon>
+      </div>
     </div>
 
     <button type="submit" class="button-dc col-span-2 w-3/4 sm:w-1/4 place-self-center">C'est parti !</button>
