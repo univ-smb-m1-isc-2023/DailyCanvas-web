@@ -2,11 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {NgFor, NgIf} from "@angular/common";
 import {Challenge} from "../../model/challenge";
 import {ChallengeService} from "../../services/challenge/challenge.service";
+import {ChallengeComponent} from "../challenge/challenge.component";
 
 @Component({
   selector: 'app-find-challenge',
   standalone: true,
-  imports: [NgFor, NgIf],
+    imports: [NgFor, NgIf, ChallengeComponent],
   templateUrl: './find-challenge.component.html',
   styleUrl: './find-challenge.component.css'
 })

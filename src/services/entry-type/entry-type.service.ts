@@ -18,4 +18,30 @@ export class EntryTypeService extends GenericService<EntryType>{
     return response.data;
   }
 
+  entryTypesIsText(entryType: EntryType[]): boolean {
+    if(entryType.length > 0){
+      if(entryType[0].id === 2){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  entryTypesIsNumber(entryType: EntryType[]): boolean {
+    if(entryType.length > 0){
+      if(entryType[0].id === 3){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  entryTypesIsEmoji(entryType: EntryType[]): boolean {
+    if(entryType.length > 0){
+      if(!this.entryTypesIsText(entryType) && !this.entryTypesIsNumber(entryType)){
+        return true;
+      }
+    }
+    return false;
+  }
 }
