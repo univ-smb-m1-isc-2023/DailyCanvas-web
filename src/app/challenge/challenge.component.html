@@ -1,19 +1,22 @@
-<div class="min-h-fit h-full w-full p-2 border border-lavender bg-white rounded-3xl">
-  <p>{{challenge.name}}</p>
-  <p>{{challenge.description}}</p>
-  <p>{{challenge.duration}}</p>
-  <p>{{challenge.interval}}</p>
-  <label *ngIf="isText()" class="input-w-icon rounded-3xl">
-    Réponse :
-    <input disabled type="text" class="input-underline w-1/3" placeholder="...">
-  </label>
+<div class="min-h-fit h-full w-full p-4 border border-lavender bg-white rounded-3xl flex flex-col gap-2">
+  <p class="text-dark-lavender text-xl text-center break-words">Je veux réussir à <span class="font-semibold">{{challenge.name}}</span></p>
+  <p class="text-light-green break-words">Ce qui me permettra de {{challenge.description}}.</p>
+  <p class="text-justify text-pretty break-words">Je veux relever ce défi pendant {{challenge.duration === 0 ? 'une durée infinie' : timeToString(challenge.duration)}}.</p>
 
-  <label *ngIf="isNumber()" class="input-w-icon rounded-3xl">
-    Réponse :
-    <input disabled type="text" class="number input-underline" placeholder="...">
-  </label>
+  <div class="mt-auto">
+    <label *ngIf="isText()" class="w-full input-w-icon rounded-3xl">
+      Réponse :
+      <input disabled type="text" class="input-underline w-1/3" placeholder="...">
+    </label>
 
-  <div *ngIf="isEmojis()" class="w-full emoji-selector rounded-3xl">
-    <app-icon *ngFor="let emoji of challenge.entryTypes" [pathData]="emoji.value" class="emoji-button"></app-icon>
+    <label *ngIf="isNumber()" class="w-full input-w-icon rounded-3xl">
+      Réponse :
+      <input disabled type="text" class="number input-underline" placeholder="...">
+    </label>
+
+    <div *ngIf="isEmojis()" class="w-full h-16 emoji-selector rounded-3xl">
+      <app-icon *ngFor="let emoji of challenge.entryTypes" [pathData]="emoji.value" class="emoji-button"></app-icon>
+    </div>
+    <p class="text-lavender text-center italic">Tous les {{timeToString(challenge.interval)}}.</p>
   </div>
 </div>

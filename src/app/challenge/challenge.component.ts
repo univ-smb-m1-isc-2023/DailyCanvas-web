@@ -21,6 +21,10 @@ export class ChallengeComponent {
   constructor(private entryTypeService: EntryTypeService) {
   }
 
+  timeToString(time: number): string{
+    return time + ' jours';
+  }
+
   isText(){
     return this.entryTypeService.entryTypesIsText(this.challenge.entryTypes);
   }
