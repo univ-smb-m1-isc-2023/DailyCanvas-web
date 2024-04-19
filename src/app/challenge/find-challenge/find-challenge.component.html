@@ -1,11 +1,27 @@
 <div class="relative sm:h-full">
   <div class="relative p-10 pb-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <span *ngIf="isLoading" class="loading loading-spinner loading-lg text-dark-lavender col-span-full ml-auto mr-auto"></span>
-    <div  *ngFor="let challenge of challenges" class="relative">
-      <app-challenge (click)="subscribe(challenge)" [challenge]="challenge" class="relative hover:cursor-pointer"></app-challenge>
-      <div *ngIf="userIsSubcribe(challenge)" class="absolute -top-2 -right-2 fill-light-green text-dark-lavender">
+    <div  *ngFor="let challenge of challenges; let index = index;" class="relative">
+      <app-challenge (click)="getModal(index).showModal()" [challenge]="challenge" [disabled]="true" class="relative hover:cursor-pointer"></app-challenge>
+      <div *ngIf="userIsSubscribe(challenge)" class="absolute -top-2 -right-2 fill-light-green text-dark-lavender">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path d="M7 3.338A9.954 9.954 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/><path stroke-linejoin="round" d="m8.5 12.5l2 2l5-5"/></g></svg>
       </div>
+
+      <dialog id="subscribe_{{index}}" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box bg-light-lavender">
+          <h3 class="font-bold text-lg">Relever le défi "{{challenge.name}}" ?</h3>
+          <p class="py-4">Vous devrez ajouter une entrée au fur et à mesure que les jours passent afin de progresser.</p>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="w-10 h-10 rounded-full text-dark-lavender fill-none hover:fill-lavender absolute right-2 top-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="m14.5 9.5l-5 5m0-5l5 5M7 3.338A9.954 9.954 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></svg>
+              </button>
+              <button class="button-dc bg-light-lavender hover:bg-lavender hover:text-dark-lavender mr-3">Annuler</button>
+              <button (click)="subscribe(challenge)" class="button-dc">C'est parti !</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   </div>
   <div class="fixed bottom-32 sm:bottom-0 right-0 w-2/5 text-amber-400 text-opacity-10 -z-10">

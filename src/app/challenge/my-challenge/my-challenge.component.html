@@ -2,7 +2,7 @@
   <h1 class="title-dc">Mes objectifs</h1>
   <div class="relative p-10 pb-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <span *ngIf="isLoading" class="loading loading-spinner loading-lg text-dark-lavender col-span-full ml-auto mr-auto"></span>
-    <app-challenge *ngFor="let challenge of challenges" [challenge]="challenge" class="relative hover:cursor-pointer"></app-challenge>
+    <app-challenge *ngFor="let challenge of challenges" [challenge]="challenge" [disabled]="false" class="relative hover:cursor-pointer"></app-challenge>
   </div>
   <app-floating-nav [navElements]="redirectLinks" class="visible sm:hidden"></app-floating-nav>
   <div class="fixed bottom-32 sm:bottom-0 right-0 w-2/5 text-amber-400 text-opacity-10 -z-10">

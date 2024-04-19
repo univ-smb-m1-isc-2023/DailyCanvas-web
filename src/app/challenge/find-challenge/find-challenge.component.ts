@@ -33,13 +33,17 @@ export class FindChallengeComponent implements OnInit {
   }
 
   async subscribe(challenge: Challenge): Promise<void>{
-    if(!this.userIsSubcribe(challenge) && this.user){
+    if(!this.userIsSubscribe(challenge) && this.user){
       await this.challengeService.subscribeUserToChallenge({challengeId: challenge.id, userId: this.user.id})
       this.userChallenges.push(challenge);
     }
   }
 
-  userIsSubcribe(challenge: Challenge): boolean {
+  userIsSubscribe(challenge: Challenge): boolean {
     return this.userChallenges.filter((c: Challenge) => challenge.id === c.id).length > 0;
+  }
+
+  getModal(index: number): HTMLDialogElement{
+    return <HTMLDialogElement>document.getElementById("subscribe_" + index);
   }
 }
