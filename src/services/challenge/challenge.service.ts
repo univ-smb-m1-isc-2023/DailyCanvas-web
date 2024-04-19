@@ -27,4 +27,9 @@ export class ChallengeService extends GenericService<Challenge>{
     const response = await axios.get(`${API_URL}/${this.url}/get-all-subscribe/${idUser}`);
     return response.data;
   }
+
+  async getAllChallengeWithoutResponseOfUser(idUser: number): Promise<Challenge[]>{
+    const response = await axios.get(`${API_URL}/${this.url}/no-response-of-user/${idUser}`);
+    return response.data;
+  }
 }
