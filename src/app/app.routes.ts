@@ -10,7 +10,7 @@ import {DiscordLoginComponent} from "./connectionPages/discord-login/discord-log
 import {FindChallengeComponent} from "./challenge/find-challenge/find-challenge.component";
 import {CreateEventComponent} from "./event/create-event/create-event.component";
 import {EventsComponent} from "./event/events/events.component";
-import {MyChallengeComponent} from "./my-challenge/my-challenge.component";
+import {MyChallengeComponent} from "./challenge/my-challenge/my-challenge.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },

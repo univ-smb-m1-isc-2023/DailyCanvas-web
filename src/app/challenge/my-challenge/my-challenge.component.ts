@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ChallengeService} from "../../services/challenge/challenge.service";
-import {UserService} from "../../services/user/user.service";
-import {type Challenge} from "../../model/challenge";
-import {ChallengeComponent} from "../challenge/challenge.component";
+import {ChallengeService} from "../../../services/challenge/challenge.service";
+import {UserService} from "../../../services/user/user.service";
+import {type Challenge} from "../../../model/challenge";
+import {ChallengeComponent} from "../challenge.component";
 import {NgFor, NgIf} from "@angular/common";
-import {FloatingNavComponent, NavElement} from "../elements/floating-nav/floating-nav.component";
+import {FloatingNavComponent, NavElement} from "../../elements/floating-nav/floating-nav.component";
 
 @Component({
   selector: 'app-my-challenge',
