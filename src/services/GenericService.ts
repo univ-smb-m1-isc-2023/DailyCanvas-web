@@ -4,7 +4,7 @@ import {LocalstoreService} from "./localstore/localstore.service";
 
 export class GenericService<T> {
 
-    constructor(private url: string ) {
+    constructor(protected url: string ) {
       let localstore: LocalstoreService<string> = new LocalstoreService();
       if (localstore.get("token") !== null){
         axios.defaults.headers.common['Authorization'] = `Bearer ${localstore.get('token')}`

@@ -10,6 +10,7 @@ import {DiscordLoginComponent} from "./connectionPages/discord-login/discord-log
 import {FindChallengeComponent} from "./challenge/find-challenge/find-challenge.component";
 import {CreateEventComponent} from "./event/create-event/create-event.component";
 import {EventsComponent} from "./event/events/events.component";
+import {MyChallengeComponent} from "./my-challenge/my-challenge.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'event/create', component: CreateEventComponent},
   { path: 'events', component: EventsComponent},
 
+  { path: 'challenge/my', component: MyChallengeComponent},
   { path: 'challenge/create', component: CreateChallengeComponent},
   { path: 'challenges', component: FindChallengeComponent},
 
