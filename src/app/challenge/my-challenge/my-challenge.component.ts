@@ -46,4 +46,12 @@ export class MyChallengeComponent implements OnInit {
       this.challenges = await this.challengeService.getAllChallengeSubscribeOfUser(userId)
     }
   }
+
+  unsubscribe(challenge: Challenge){
+    console.log("unsubscribe", challenge.name)
+  }
+
+  getModal(index: number): HTMLDialogElement{
+    return <HTMLDialogElement>document.getElementById("subscribe_" + index);
+  }
 }

@@ -2,7 +2,27 @@
   <h1 class="title-dc">Mes objectifs</h1>
   <div class="relative p-10 pb-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <span *ngIf="isLoading" class="loading loading-spinner loading-lg text-dark-lavender col-span-full ml-auto mr-auto"></span>
-    <app-challenge *ngFor="let challenge of challenges" [challenge]="challenge" [disabled]="false" class="relative hover:cursor-pointer"></app-challenge>
+    <div  *ngFor="let challenge of challenges; let index = index;" class="relative parent-hover">
+      <app-challenge [challenge]="challenge" class="relative"></app-challenge>
+      <div class="absolute invisible child-visible -top-2 -right-2 fill-light-green text-dark-lavender">
+        <svg (click)="getModal(index).showModal()" class="hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M2.75 6.167c0-.46.345-.834.771-.834h2.665c.529-.015.996-.378 1.176-.916l.03-.095l.115-.372c.07-.228.131-.427.217-.605c.338-.702.964-1.189 1.687-1.314c.184-.031.377-.031.6-.031h3.478c.223 0 .417 0 .6.031c.723.125 1.35.612 1.687 1.314c.086.178.147.377.217.605l.115.372l.03.095c.18.538.74.902 1.27.916h2.57c.427 0 .772.373.772.834c0 .46-.345.833-.771.833H3.52c-.426 0-.771-.373-.771-.833M11.607 22h.787c2.707 0 4.06 0 4.941-.863c.88-.864.97-2.28 1.15-5.111l.26-4.081c.098-1.537.147-2.305-.295-2.792c-.442-.487-1.187-.487-2.679-.487H8.23c-1.491 0-2.237 0-2.679.487c-.441.487-.392 1.255-.295 2.792l.26 4.08c.18 2.833.27 4.248 1.15 5.112C7.545 22 8.9 22 11.607 22"/></svg>
+      </div>
+
+      <dialog id="subscribe_{{index}}" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box bg-light-lavender">
+          <h3 class="font-bold text-lg">Arrêter le défi "{{challenge.name}}" ?</h3>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="w-10 h-10 rounded-full text-dark-lavender fill-none hover:fill-lavender absolute right-2 top-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="m14.5 9.5l-5 5m0-5l5 5M7 3.338A9.954 9.954 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></svg>
+              </button>
+              <button class="button-dc bg-light-lavender hover:bg-lavender hover:text-dark-lavender mr-3">Annuler</button>
+              <button (click)="unsubscribe(challenge)" class="button-dc">J'arrête ce challenge</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+    </div>
   </div>
   <app-floating-nav [navElements]="redirectLinks" class="visible sm:hidden"></app-floating-nav>
   <div class="fixed bottom-32 sm:bottom-0 right-0 w-2/5 text-amber-400 text-opacity-10 -z-10">
