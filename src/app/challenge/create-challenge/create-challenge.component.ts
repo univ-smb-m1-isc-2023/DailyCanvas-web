@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Renderer2} from '@angular/core';
 import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {ChallengeService} from "../../services/challenge/challenge.service";
-import {type Challenge} from "../../model/challenge";
+import {ChallengeService} from "../../../services/challenge/challenge.service";
+import {type Challenge} from "../../../model/challenge";
 import {NgIf} from "@angular/common";
 
 @Component({

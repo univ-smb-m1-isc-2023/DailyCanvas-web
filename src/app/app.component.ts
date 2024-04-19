@@ -42,15 +42,19 @@ export class AppComponent implements OnInit{
     return false
   }
 
-  ngOnInit(): void {
-    let noslide = this.getConnectionPage()
-    if (this.userService.getIsLoggedIn() && !noslide) {
+  async getIfUserLogIn(){
+    let res = await this.userService.getIsLoggedIn()
+    if (res) {
       console.log("User is logged in");
       this.loggedIn = true;
     }else {
       console.log("User is not logged in");
       this.loggedIn = false;
     }
+  }
+
+  ngOnInit() {
+    this.getIfUserLogIn()
     this.userService.isLoggedIn.subscribe((value) => {
       this.loggedIn = value;
     });

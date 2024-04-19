@@ -6,6 +6,9 @@ import {UserService} from "../../services/user/user.service";
 import {LocalstoreService} from "../../services/localstore/localstore.service";
 import {RegisterComponent} from "../connectionPages/register/register.component";
 import {Router} from "@angular/router";
+import {CalendarComponent} from "../components/calendar/calendar.component";
+import {QuickEntryComponent} from "../components/quick-entry/quick-entry.component";
+import {DailyStreakComponent} from "../components/daily-streak/daily-streak.component";
 
 @Component({
   selector: 'app-home',
@@ -14,6 +17,9 @@ import {Router} from "@angular/router";
     FormsModule,
     NgForOf,
     RegisterComponent,
+    CalendarComponent,
+    QuickEntryComponent,
+    DailyStreakComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
