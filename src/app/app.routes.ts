@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'conditions', component: UtilisationConditionsComponent},
   {path: "confidentiality", component: ConfidentialityRulesComponent},
   {path: "conditions", component: UtilisationConditionsComponent},
-  {path: "discord/:idUser", component: DiscordLoginComponent},
+  {path: "discord/:userName/:idUser", component: DiscordLoginComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];
