@@ -39,6 +39,10 @@ export class FindChallengeComponent implements OnInit {
     }
   }
 
+  unsubscribe(challenge: Challenge){
+    console.log("unsubscribe", challenge.name)
+  }
+
   userIsSubscribe(challenge: Challenge): boolean {
     return this.userChallenges.filter((c: Challenge) => challenge.id === c.id).length > 0;
   }

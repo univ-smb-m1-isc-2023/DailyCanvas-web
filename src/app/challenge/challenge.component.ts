@@ -17,7 +17,6 @@ import {NgFor, NgIf} from "@angular/common";
 })
 export class ChallengeComponent {
   @Input() challenge!: Challenge;
-  @Input() disabled!: boolean;
 
   constructor(private entryTypeService: EntryTypeService) {
   }

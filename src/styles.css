@@ -72,6 +72,9 @@
   .flex-fixed {
     flex: 0 0 auto;
   }
+  .parent-hover:hover .child-visible {
+    @apply visible;
+  }
 }
 
 html, body { height: 100%; }
