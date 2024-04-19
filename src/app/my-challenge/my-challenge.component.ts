@@ -4,7 +4,7 @@ import {UserService} from "../../services/user/user.service";
 import {type Challenge} from "../../model/challenge";
 import {ChallengeComponent} from "../challenge/challenge.component";
 import {NgFor, NgIf} from "@angular/common";
-import {FloatingNavComponent} from "../elements/floating-nav/floating-nav.component";
+import {FloatingNavComponent, NavElement} from "../elements/floating-nav/floating-nav.component";
 
 @Component({
   selector: 'app-my-challenge',
@@ -21,6 +21,16 @@ import {FloatingNavComponent} from "../elements/floating-nav/floating-nav.compon
 export class MyChallengeComponent implements OnInit {
   isLoading: boolean = false;
   challenges: Challenge[] = [];
+  redirectLinks: NavElement[] = [
+    {
+      name: "Créer un défi",
+      link: "/challenge/create"
+    },
+    {
+      name: "Trouver un défi",
+      link: "/challenges"
+    }
+  ];
   constructor(private challengeService: ChallengeService, private userService: UserService) {
   }
 
