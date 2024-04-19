@@ -49,6 +49,7 @@ export class QuickEntryComponent implements OnInit{
   }
 
   sendEntry(): void {
+    console.log(this.challenges)
     console.log(this.entryForm)
     if(this.isEmojis() && !this.entryForm.value.emojiResponse){
       this.submittedAndInvalid = true;
