@@ -14,6 +14,9 @@
 }
 
 @layer components {
+  .title-dc {
+    @apply text-dark-lavender text-2xl sm:text-4xl text-center font-light sm:font-thin;
+  }
   .error {
     @apply text-sm text-red-500;
   }

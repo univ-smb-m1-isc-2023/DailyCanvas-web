@@ -3,6 +3,8 @@ import {NgFor, NgIf} from "@angular/common";
 import {Challenge} from "../../model/challenge";
 import {ChallengeService} from "../../services/challenge/challenge.service";
 import {ChallengeComponent} from "../challenge/challenge.component";
+import {UserService} from "../../services/user/user.service";
+import {type User} from "../../model/user";
 
 @Component({
   selector: 'app-find-challenge',
@@ -14,18 +16,30 @@ import {ChallengeComponent} from "../challenge/challenge.component";
 export class FindChallengeComponent implements OnInit {
   isLoading: boolean = false;
   challenges!: Challenge[];
+  userChallenges: Challenge[] = [];
+  user!: User | undefined;
 
-  constructor(private challengeService: ChallengeService) {
+  constructor(private challengeService: ChallengeService, private userService: UserService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.user = this.userService.getLocalUser();
     this.isLoading = true;
-    this.challengeService.getAll()
-      .then((challenges: Challenge[]) => {
-        this.isLoading = false
-        this.challenges = challenges;
-      });
+    this.challenges = await this.challengeService.getAll();
+    if(this.user){
+      this.userChallenges = await this.challengeService.getAllChallengeSubscribeOfUser(this.user.id)
+    }
+    this.isLoading = false
   }
 
+  async subscribe(challenge: Challenge): Promise<void>{
+    if(!this.userIsSubcribe(challenge) && this.user){
+      await this.challengeService.subscribeUserToChallenge({challengeId: challenge.id, userId: this.user.id})
+      this.userChallenges.push(challenge);
+    }
+  }
 
+  userIsSubcribe(challenge: Challenge): boolean {
+    return this.userChallenges.filter((c: Challenge) => challenge.id === c.id).length > 0;
+  }
 }

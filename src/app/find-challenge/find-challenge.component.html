@@ -2,8 +2,8 @@
   <div class="relative p-10 pb-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <span *ngIf="isLoading" class="loading loading-spinner loading-lg text-dark-lavender col-span-full ml-auto mr-auto"></span>
     <div  *ngFor="let challenge of challenges" class="relative">
-      <app-challenge [challenge]="challenge" class="relative hover:cursor-pointer"></app-challenge>
-      <div class="absolute -top-2 -right-2 fill-light-green text-dark-lavender">
+      <app-challenge (click)="subscribe(challenge)" [challenge]="challenge" class="relative hover:cursor-pointer"></app-challenge>
+      <div *ngIf="userIsSubcribe(challenge)" class="absolute -top-2 -right-2 fill-light-green text-dark-lavender">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path d="M7 3.338A9.954 9.954 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/><path stroke-linejoin="round" d="m8.5 12.5l2 2l5-5"/></g></svg>
       </div>
     </div>
