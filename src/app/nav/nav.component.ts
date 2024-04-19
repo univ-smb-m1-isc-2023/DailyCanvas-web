@@ -55,7 +55,7 @@ export class NavComponent {
           link: "/event/create"
         }
       ]
-    },
+    }
   ];
 
   CHALLENGES: navElement = this.elements[0];

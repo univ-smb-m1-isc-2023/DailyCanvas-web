@@ -14,6 +14,9 @@
 }
 
 @layer components {
+  .title-dc {
+    @apply text-dark-lavender text-2xl sm:text-4xl text-center font-light sm:font-thin;
+  }
   .error {
     @apply text-sm text-red-500;
   }
@@ -21,10 +24,38 @@
     @apply rounded-3xl font-semibold bg-lavender text-dark-lavender p-3 transition-all ease-in-out duration-500 hover:bg-dark-lavender hover:text-light-lavender;
   }
   .input-w-icon {
-    @apply text-dark-lavender rounded-full bg-white border border-lavender p-4 hover:cursor-pointer focus-within:ring-dark-lavender focus-within:ring focus-within:ring-opacity-70;
+    @apply block text-dark-lavender rounded-full bg-white border border-lavender p-4 hover:cursor-pointer focus-within:ring-dark-lavender focus-within:ring focus-within:ring-opacity-70;
   }
   .input-w-icon input {
-    @apply text-black hover:cursor-pointer focus:outline-none;
+    @apply bg-white text-black hover:cursor-pointer focus:outline-none;
+  }
+  .input-w-icon .input-underline {
+    @apply border-b border-lavender;
+  }
+  .input-w-icon .number {
+    @apply w-6;
+  }
+  .div-selector {
+    @apply text-dark-lavender rounded-full bg-white border border-lavender p-4;
+  }
+  .emoji-selector {
+    @apply flex justify-evenly rounded-full bg-white border border-lavender p-4 focus-within:ring-dark-lavender focus-within:ring focus-within:ring-opacity-70;
+  }
+  .emoji-button {
+    @apply w-12 text-lavender hover:cursor-pointer;
+  }
+  .emoji-button svg{
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .emoji-button-selected {
+    @apply text-dark-lavender;
+  }
+  .select-dc {
+    @apply text-dark-lavender rounded-full bg-white border border-lavender p-4 hover:cursor-pointer focus-within:ring-dark-lavender focus-within:ring focus-within:ring-opacity-70;
+  }
+  .select-dc option {
+    @apply rounded;
   }
   .phone-nav-icon {
     @apply h-10 w-10 cursor-pointer rounded-full fill-none;
@@ -35,4 +66,13 @@
   .phone-nav-icon-selected {
     @apply fill-light-green;
   }
+  .flex-fill {
+    flex: 0 1 auto;
+  }
+  .flex-fixed {
+    flex: 0 0 auto;
+  }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

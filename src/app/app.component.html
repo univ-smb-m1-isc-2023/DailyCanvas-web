@@ -1,13 +1,13 @@
-<div class="h-screen w-screen flex flex-col">
-  <app-header/>
+<div class="h-screen w-screen max-h-screen max-w-screen flex flex-col">
+  <app-header class="flex-none"/>
   @if (loggedIn){
-    <div class="h-full w-full flex flex-col sm:flex-row">
-      <app-nav class="w-full sm:w-1/4 basis-1/6 order-last sm:order-first"></app-nav>
-      <div class="grow">
+    <div class="absolute sm:static sm:-mt-20 sm:pt-20 h-full w-full flex flex-col sm:flex-row">
+      <app-nav class="basis-1/6 sm:grow-0 flex-fixed order-last sm:order-first z-20"></app-nav>
+      <div class="basis-5/6 flex-fill sm:flex-auto pt-20 sm:pt-0 overflow-y-auto">
         <router-outlet></router-outlet>
       </div>
     </div>
   } @else {
-    <app-connection class="h-full"></app-connection>
+    <app-connection [page]="page" class="h-full"></app-connection>
   }
 </div>

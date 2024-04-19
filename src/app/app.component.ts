@@ -25,18 +25,36 @@ const MODULES =[
 export class AppComponent implements OnInit{
   loggedIn: boolean = false;
   title = 'Daily Canvas';
+  page: number = 2;
+  numPath = {"register": 1,"login": 2, "conditions": 3, "confidentiality": 4, "discord": 5}
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
-  ngOnInit(): void {
-    if (this.userService.getIsLoggedIn()) {
+  getConnectionPage(){
+    console.log(window.location.pathname)
+    for (const [key, value] of Object.entries(this.numPath)){
+      if (window.location.pathname.includes(key)){
+        this.page = value;
+        return true
+      }
+    }
+    return false
+  }
+
+  async getIfUserLogIn(){
+    let res = await this.userService.getIsLoggedIn()
+    if (res) {
       console.log("User is logged in");
       this.loggedIn = true;
     }else {
       console.log("User is not logged in");
       this.loggedIn = false;
     }
+  }
+
+  ngOnInit() {
+    this.getIfUserLogIn()
     this.userService.isLoggedIn.subscribe((value) => {
       this.loggedIn = value;
     });
