@@ -17,4 +17,9 @@ export class EventService extends GenericService<Event>{
     const response = await axios.get<Event[]>(`${API_URL}/event/byUser/`+idUser);
     return response.data;
   }
+
+  async getAllBirthdaysOfUser(idUser: number){
+    const response = await axios.get<Event[]>(`${API_URL}/event/anniversary/`+idUser);
+    return response.data;
+  }
 }

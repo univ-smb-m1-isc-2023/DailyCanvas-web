@@ -11,13 +11,16 @@
         {{month[time.getMonth()]}}
       </p>
     </div>
-    <div class="py-2">
+    <div class="py-2 text-center">
       <p class="text-md text-dark-lavender">
         Anniversaires
       </p>
       <div class="text-sm flex flex-col">
-        <p>Antoine</p>
-        <p>Elyne</p>
+        @for (birthday of birthdays; track birthday.id){
+            <p> {{birthday.title}}</p>
+        } @empty {
+          <p class="text-dark-lavender">Pas d'anniversaire aujourd'hui</p>
+        }
       </div>
     </div>
   </div>
