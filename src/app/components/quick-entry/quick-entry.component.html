@@ -2,7 +2,11 @@
   <span class="loading loading-spinner loading-lg text-dark-lavender"></span>
 </div>
 <div *ngIf="challenges" class="relative w-full h-full flex flex-col justify-center items-center">
-  <p *ngIf="challenges.length === 0" class="text-dark-lavender text-center py-2 font-medium">Pas de challenge en cours.</p>
+  <div *ngIf="challenges.length === 0">
+    <p *ngIf="challengeToAnswer === 0" class="text-dark-lavender text-center py-2 font-medium">Vous avez répondu à tous vos challenges !</p>
+    <p *ngIf="challengeToAnswer === challengeAnswered && challengeToAnswer > 0" class="text-dark-lavender text-center py-2 font-medium">Bravo, vous avez répondu à tous vos challenges !</p>
+  </div>
+
   <form *ngIf="challenges.length > 0" [formGroup]="entryForm" (ngSubmit)="sendEntry()" class="w-5/6 flex flex-col justify-center items-center">
     <p class="absolute top-0 right-0 text-green font-medium ">{{challengeAnswered}}/{{challengeToAnswer}}</p>
     <p class="text-dark-lavender text-center pb-2 font-medium">Est-ce que j'ai réussi à {{challenges[currentChallenge].name}} ?</p>

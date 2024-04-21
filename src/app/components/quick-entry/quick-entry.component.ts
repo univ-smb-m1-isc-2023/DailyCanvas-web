@@ -9,6 +9,7 @@ import {ChallengeService} from "../../../services/challenge/challenge.service";
 import {UserService} from "../../../services/user/user.service";
 import {EntryService} from "../../../services/entry/entry.service";
 import {type Entry} from "../../../model/entry";
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-quick-entry',
@@ -80,16 +81,19 @@ export class QuickEntryComponent implements OnInit {
         idSubscribeChallenge: this.challenges[this.currentChallenge].subscribeId!
       }
       this.entryService.create(entry)
-        .then(async () => {
+        .then(() => {
           this.entryForm.reset();
           this.challengeAnswered++;
           this.challenges = this.challenges!.filter((challenge_in: Challenge) => challenge_in !== this.challenges[this.currentChallenge]);
           this.nextChallenge();
           if (this.challenges.length === 0) {
-            this.challenges = await this.getChallengesWithoutResponse();
-            this.challengeToAnswer = this.challenges.length;
-            this.currentChallenge = 0;
-            this.challengeAnswered = 0;
+            this.celebrate();
+            setInterval(async () => {
+              this.challenges = await this.getChallengesWithoutResponse();
+              this.challengeToAnswer = this.challenges.length;
+              this.currentChallenge = 0;
+              this.challengeAnswered = 0;
+            }, 5000)
           }
         })
         .catch((e) => console.log("error : ", e))
@@ -139,5 +143,18 @@ export class QuickEntryComponent implements OnInit {
 
   emojiSelected(emoji: EntryType): boolean {
     return this.entryForm.value.emojiResponse === emoji;
+  }
+
+  celebrate(){
+    const duration = 5000; // in milliseconds
+
+    confetti({
+      particleCount: 100,
+      spread: 160,
+      origin: { y: 0.6 },
+    });
+
+    // Clear confetti after a certain duration
+    setTimeout(() => confetti.reset(), duration);
   }
 }
