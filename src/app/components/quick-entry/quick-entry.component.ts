@@ -26,11 +26,10 @@ import {type Entry} from "../../../model/entry";
 export class QuickEntryComponent implements OnInit{
   challenges!: Challenge[];
   currentChallenge!: number;
-  submittedAndInvalid: boolean = false;
 
   entryForm = new FormGroup({
     textResponse: new FormControl<string>(''),
-    numberResponse: new FormControl<number>(1, {
+    numberResponse: new FormControl<number | null>(null, {
       validators: [Validators.pattern(/^\d*\.?\d+$/)]
     }),
     emojiResponse: new FormControl<EntryType | undefined>(undefined)
@@ -48,43 +47,45 @@ export class QuickEntryComponent implements OnInit{
     return await this.challengeService.getAllChallengeWithoutResponseOfUser(this.userService.getLocalUser()!.id);
   }
 
-  sendEntry(): void {
-    console.log(this.challenges)
-    console.log(this.entryForm)
-    if(this.isText()){
-      this.entryForm.get('textResponse')?.setValidators(Validators.required)
+  checkErrors(): void{
+    if(this.isText() && !this.entryForm.value.textResponse){
+      this.entryForm.get('textResponse')?.setErrors({required: "TextResponse is required"})
+    } else {
+      this.entryForm.get('textResponse')?.setErrors(null)
+    }
+    if(this.isNumber() && !this.entryForm.value.numberResponse){
+      this.entryForm.get('numberResponse')?.setErrors({required: "NumberResponse is required"})
+    } else {
+      this.entryForm.get('numberResponse')?.setErrors(null)
     }
     if(this.isEmojis() && !this.entryForm.value.emojiResponse){
-      this.submittedAndInvalid = true;
-      //this.entryForm.get('emojiResponse')?.setErrors()
+      this.entryForm.get('emojiResponse')?.setErrors({required: "EmojiResponse is required"})
     } else {
-      if(this.entryForm.valid){
-        console.log("cool")
-        const entry: Omit<Entry, "id"> = {
-          idEntryType: this.isEmojis() ? this.entryForm.value.emojiResponse!.id : this.challenges[this.currentChallenge].entryTypes[0].id,
-          value: this.isEmojis() ? null : (this.isText() ? this.entryForm.value.textResponse! : this.entryForm.value.numberResponse!.toString()),
-          date: new Date(),
-          idSubscribeChallenge: this.challenges[this.currentChallenge].subscribeId!
-        }
-        this.entryService.create(entry)
-          .then(async (e) => {
-            console.log(e);
-            this.entryForm.reset();
-            this.entryForm.get('textResponse')?.removeValidators(Validators.required)
-            this.entryForm.get('numberResponse')?.removeValidators(Validators.required)
-            console.log(this.challenges.length, this.currentChallenge + 1, this.challenges.length > this.currentChallenge + 1)
-            if (this.challenges.length > this.currentChallenge + 1) {
-              this.currentChallenge++;
-            } else {
-              console.log("bon")
-              //this.challenges = await this.getChallengesWithoutResponse();
-              this.currentChallenge = 0;
-              this.challenges = [];
-            }
-            console.log(this.currentChallenge)
-          })
-          .catch((e) => console.log(e))
+      this.entryForm.get('emojiResponse')?.setErrors(null)
+    }
+  }
+
+  sendEntry(): void {
+    this.checkErrors();
+
+    if(this.entryForm.valid){
+      const entry: Omit<Entry, "id"> = {
+        idEntryType: this.isEmojis() ? this.entryForm.value.emojiResponse!.id : this.challenges[this.currentChallenge].entryTypes[0].id,
+        value: this.isEmojis() ? null : (this.isText() ? this.entryForm.value.textResponse! : this.entryForm.value.numberResponse!.toString()),
+        date: new Date(),
+        idSubscribeChallenge: this.challenges[this.currentChallenge].subscribeId!
       }
+      this.entryService.create(entry)
+        .then(async () => {
+          this.entryForm.reset();
+          if (this.challenges.length > this.currentChallenge + 1) {
+            this.currentChallenge++;
+          } else {
+            this.challenges = await this.getChallengesWithoutResponse();
+            this.currentChallenge = 0;
+          }
+        })
+        .catch((e) => console.log("error : ", e))
     }
   }
 
