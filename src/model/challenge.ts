@@ -9,4 +9,5 @@ export interface Challenge {
   interval: number;
   creationDate: Date;
   entryTypes: EntryType[];
+  subscribeId?: number;
 }

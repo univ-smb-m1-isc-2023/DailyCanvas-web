@@ -1,13 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EntryTypeService} from "../../../services/entry-type/entry-type.service";
 import {type Challenge} from "../../../model/challenge";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {EntryType} from "../../../model/entry-type";
+import {type EntryType} from "../../../model/entry-type";
 import {IconComponent} from "../../elements/icon/icon.component";
 import {NgClass, NgFor, NgIf} from "@angular/common";
 import {ChallengeService} from "../../../services/challenge/challenge.service";
-import {User} from "../../../model/user";
 import {UserService} from "../../../services/user/user.service";
+import {EntryService} from "../../../services/entry/entry.service";
+import {type Entry} from "../../../model/entry";
 
 @Component({
   selector: 'app-quick-entry',
@@ -30,12 +31,11 @@ export class QuickEntryComponent implements OnInit{
   entryForm = new FormGroup({
     textResponse: new FormControl<string>(''),
     numberResponse: new FormControl<number>(1, {
-      validators: [Validators.pattern(/^\d*\.?\d+$/)],
-      nonNullable: true
+      validators: [Validators.pattern(/^\d*\.?\d+$/)]
     }),
     emojiResponse: new FormControl<EntryType | undefined>(undefined)
   });
-  constructor(private entryTypeService: EntryTypeService, private challengeService: ChallengeService, private userService: UserService) {
+  constructor(private entryTypeService: EntryTypeService, private entryService: EntryService, private challengeService: ChallengeService, private userService: UserService) {
   }
   async ngOnInit(): Promise<void> {
     if(this.userService.getLocalUser()){
@@ -51,11 +51,39 @@ export class QuickEntryComponent implements OnInit{
   sendEntry(): void {
     console.log(this.challenges)
     console.log(this.entryForm)
+    if(this.isText()){
+      this.entryForm.get('textResponse')?.setValidators(Validators.required)
+    }
     if(this.isEmojis() && !this.entryForm.value.emojiResponse){
       this.submittedAndInvalid = true;
+      //this.entryForm.get('emojiResponse')?.setErrors()
     } else {
       if(this.entryForm.valid){
         console.log("cool")
+        const entry: Omit<Entry, "id"> = {
+          idEntryType: this.isEmojis() ? this.entryForm.value.emojiResponse!.id : this.challenges[this.currentChallenge].entryTypes[0].id,
+          value: this.isEmojis() ? null : (this.isText() ? this.entryForm.value.textResponse! : this.entryForm.value.numberResponse!.toString()),
+          date: new Date(),
+          idSubscribeChallenge: this.challenges[this.currentChallenge].subscribeId!
+        }
+        this.entryService.create(entry)
+          .then(async (e) => {
+            console.log(e);
+            this.entryForm.reset();
+            this.entryForm.get('textResponse')?.removeValidators(Validators.required)
+            this.entryForm.get('numberResponse')?.removeValidators(Validators.required)
+            console.log(this.challenges.length, this.currentChallenge + 1, this.challenges.length > this.currentChallenge + 1)
+            if (this.challenges.length > this.currentChallenge + 1) {
+              this.currentChallenge++;
+            } else {
+              console.log("bon")
+              //this.challenges = await this.getChallengesWithoutResponse();
+              this.currentChallenge = 0;
+              this.challenges = [];
+            }
+            console.log(this.currentChallenge)
+          })
+          .catch((e) => console.log(e))
       }
     }
   }
