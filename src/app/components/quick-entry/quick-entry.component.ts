@@ -52,26 +52,9 @@ export class QuickEntryComponent implements OnInit {
     return await this.challengeService.getAllChallengeWithoutResponseOfUser(this.userService.getLocalUser()!.id);
   }
 
-  checkErrors(): void{
-    if(this.isText() && !this.entryForm.value.textResponse){
-      this.entryForm.get('textResponse')?.setErrors({required: "TextResponse is required"})
-    } else {
-      this.entryForm.get('textResponse')?.setErrors(null)
-    }
-    if(this.isNumber() && !this.entryForm.value.numberResponse){
-      this.entryForm.get('numberResponse')?.setErrors({required: "NumberResponse is required"})
-    } else {
-      this.entryForm.get('numberResponse')?.setErrors(null)
-    }
-    if(this.isEmojis() && !this.entryForm.value.emojiResponse){
-      this.entryForm.get('emojiResponse')?.setErrors({required: "EmojiResponse is required"})
-    } else {
-      this.entryForm.get('emojiResponse')?.setErrors(null)
-    }
-  }
 
   sendEntry(): void {
-    this.checkErrors();
+    this.entryService.checkErrors(this.entryForm, this.challenges[this.currentChallenge]);
 
     if(this.entryForm.valid){
       const entry: Omit<Entry, "id"> = {
@@ -108,27 +91,6 @@ export class QuickEntryComponent implements OnInit {
     }
   }
 
-  isText(): boolean {
-    if(this.challenges[this.currentChallenge]){
-      return this.entryTypeService.entryTypesIsText(this.challenges[this.currentChallenge].entryTypes)
-    }
-    return false;
-  }
-
-  isNumber(): boolean {
-    if(this.challenges[this.currentChallenge]){
-      return this.entryTypeService.entryTypesIsNumber(this.challenges[this.currentChallenge].entryTypes);
-    }
-    return false;
-  }
-
-  isEmojis(): boolean {
-    if(this.challenges[this.currentChallenge]){
-      return this.entryTypeService.entryTypesIsEmoji(this.challenges[this.currentChallenge].entryTypes);
-    }
-    return false;
-  }
-
   updateEmojisUnique(emoji: EntryType): void{
     if(this.entryForm.value.emojiResponse){
       if(this.emojiSelected(emoji)){
@@ -156,5 +118,17 @@ export class QuickEntryComponent implements OnInit {
 
     // Clear confetti after a certain duration
     setTimeout(() => confetti.reset(), duration);
+  }
+
+  isText(): boolean {
+    return this.entryService.isText(this.challenges[this.currentChallenge]);
+  }
+
+  isNumber(): boolean {
+    return this.entryService.isNumber(this.challenges[this.currentChallenge]);
+  }
+
+  isEmojis(): boolean {
+    return this.entryService.isEmojis(this.challenges[this.currentChallenge]);
   }
 }

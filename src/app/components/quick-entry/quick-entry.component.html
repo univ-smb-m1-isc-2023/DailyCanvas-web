@@ -8,7 +8,7 @@
   </div>
 
   <form *ngIf="challenges.length > 0" [formGroup]="entryForm" (ngSubmit)="sendEntry()" class="w-5/6 flex flex-col justify-center items-center">
-    <p class="absolute top-0 right-0 text-green font-medium ">{{challengeAnswered}}/{{challengeToAnswer}}</p>
+    <p class="absolute top-0 right-0 text-light-green font-medium ">{{challengeAnswered}}/{{challengeToAnswer}}</p>
     <p class="text-dark-lavender text-center pb-2 font-medium">Est-ce que j'ai réussi à {{challenges[currentChallenge].name}} ?</p>
     <label *ngIf="isText()" class="w-full input-w-icon rounded-3xl">
       Réponse :
