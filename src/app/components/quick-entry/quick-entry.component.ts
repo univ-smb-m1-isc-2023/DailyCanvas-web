@@ -23,7 +23,9 @@ import {type Entry} from "../../../model/entry";
   templateUrl: './quick-entry.component.html',
   styleUrl: './quick-entry.component.css'
 })
-export class QuickEntryComponent implements OnInit{
+export class QuickEntryComponent implements OnInit {
+  challengeToAnswer!: number;
+  challengeAnswered!: number;
   challenges!: Challenge[];
   currentChallenge!: number;
 
@@ -39,6 +41,8 @@ export class QuickEntryComponent implements OnInit{
   async ngOnInit(): Promise<void> {
     if(this.userService.getLocalUser()){
       this.challenges = await this.getChallengesWithoutResponse()
+      this.challengeToAnswer = this.challenges.length;
+      this.challengeAnswered = 0;
     }
     this.currentChallenge = 0;
   }
@@ -78,14 +82,25 @@ export class QuickEntryComponent implements OnInit{
       this.entryService.create(entry)
         .then(async () => {
           this.entryForm.reset();
-          if (this.challenges.length > this.currentChallenge + 1) {
-            this.currentChallenge++;
-          } else {
+          this.challengeAnswered++;
+          this.challenges = this.challenges!.filter((challenge_in: Challenge) => challenge_in !== this.challenges[this.currentChallenge]);
+          this.nextChallenge();
+          if (this.challenges.length === 0) {
             this.challenges = await this.getChallengesWithoutResponse();
+            this.challengeToAnswer = this.challenges.length;
             this.currentChallenge = 0;
+            this.challengeAnswered = 0;
           }
         })
         .catch((e) => console.log("error : ", e))
+    }
+  }
+
+  nextChallenge(): void{
+    if (this.challenges.length > this.currentChallenge + 1) {
+      this.currentChallenge++;
+    } else {
+      this.currentChallenge = 0;
     }
   }
 
