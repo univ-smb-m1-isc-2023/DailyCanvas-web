@@ -4,6 +4,8 @@ import {type Entry} from "../../model/entry";
 import {EntryTypeService} from "../entry-type/entry-type.service";
 import {FormGroup} from "@angular/forms";
 import {type Challenge} from "../../model/challenge";
+import axios from "axios";
+import {API_URL} from "../utils";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,11 @@ export class EntryService extends GenericService<Entry>{
 
   constructor(private entryTypeService: EntryTypeService) {
     super('entry');
+  }
+
+  async getAllEntriesOfUser(id: number): Promise<Entry[]> {
+    const response = await axios.get(`${API_URL}/${this.url}/get-all-of-user/${id}`);
+    return response.data;
   }
 
   checkErrors(form: FormGroup, challenge: Challenge): void {
