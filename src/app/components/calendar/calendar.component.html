@@ -11,18 +11,18 @@
         {{month[time.getMonth()]}}
       </p>
     </div>
-    <div class="py-2 text-center">
-      <p class="text-md text-dark-lavender">
-        Anniversaires
-      </p>
-      <div class="text-sm flex flex-col">
-        @for (birthday of birthdays; track birthday.id){
+    @if (birthdays.length > 0){
+      <div class="py-2 text-center">
+        <p class="text-md text-dark-lavender">
+          Anniversaires
+        </p>
+        <div class="text-sm flex flex-col">
+          @for (birthday of birthdays; track birthday.id){
             <p> {{birthday.title}}</p>
-        } @empty {
-          <p class="text-dark-lavender">Pas d'anniversaire aujourd'hui</p>
-        }
+          }
+        </div>
       </div>
-    </div>
+    }
   </div>
   <div class="overflow-auto h-full p-5 grow">
     @for (event of events; track event.id){
