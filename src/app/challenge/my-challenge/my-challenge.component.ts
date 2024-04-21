@@ -5,6 +5,7 @@ import {type Challenge} from "../../../model/challenge";
 import {ChallengeComponent} from "../challenge.component";
 import {NgFor, NgIf} from "@angular/common";
 import {FloatingNavComponent, NavElement} from "../../elements/floating-nav/floating-nav.component";
+import {EntryComponent} from "../../components/entry/entry.component";
 
 @Component({
   selector: 'app-my-challenge',
@@ -13,7 +14,8 @@ import {FloatingNavComponent, NavElement} from "../../elements/floating-nav/floa
     ChallengeComponent,
     NgFor,
     NgIf,
-    FloatingNavComponent
+    FloatingNavComponent,
+    EntryComponent
   ],
   templateUrl: './my-challenge.component.html',
   styleUrl: './my-challenge.component.css'
@@ -51,7 +53,16 @@ export class MyChallengeComponent implements OnInit {
     console.log("unsubscribe", challenge.name)
   }
 
-  getModal(index: number): HTMLDialogElement{
-    return <HTMLDialogElement>document.getElementById("subscribe_" + index);
+  getModalDelete(index: number): HTMLDialogElement{
+    return <HTMLDialogElement>document.getElementById("delete_" + index);
+  }
+  getModalEntry(index: number): HTMLDialogElement{
+    return <HTMLDialogElement>document.getElementById("entry_" + index);
+  }
+
+  closeModalEntry = (index: number): void => { this.getModalEntry(index).close();}
+
+  test(){
+    console.log("test")
   }
 }

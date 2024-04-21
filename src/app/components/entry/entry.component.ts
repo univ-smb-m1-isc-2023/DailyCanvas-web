@@ -2,7 +2,6 @@ import {Component, Input} from '@angular/core';
 import {type Challenge} from "../../../model/challenge";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {EntryType} from "../../../model/entry-type";
-import {EntryTypeService} from "../../../services/entry-type/entry-type.service";
 import {Entry} from "../../../model/entry";
 import {EntryService} from "../../../services/entry/entry.service";
 import {NgClass, NgFor, NgIf} from "@angular/common";
@@ -17,6 +16,8 @@ import {IconComponent} from "../../elements/icon/icon.component";
 })
 export class EntryComponent {
   @Input() challenge!: Challenge;
+  @Input() actionOnSubmit!: any;
+  @Input() id!: number;
   entryForm = new FormGroup({
     textResponse: new FormControl<string>(''),
     numberResponse: new FormControl<number | null>(null, {
@@ -41,7 +42,10 @@ export class EntryComponent {
         idSubscribeChallenge: this.challenge.subscribeId!
       }
       this.entryService.create(entry)
-        .then(() => this.entryForm.reset())
+        .then(() => {
+          this.entryForm.reset();
+          this.actionOnSubmit(this.id);
+        })
         .catch((e) => console.log("error : ", e))
     }
   }
