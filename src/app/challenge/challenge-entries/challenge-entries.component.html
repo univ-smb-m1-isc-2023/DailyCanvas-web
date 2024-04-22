@@ -1,9 +1,13 @@
 <div *ngIf="challenge" class="relative sm:h-full">
   <div class="pt-5 px-10">
     <h1 class="title-dc">Je veux réussir à <span class="font-medium">{{challenge.name}}</span></h1>
-    <div *ngIf="entries">
-      <div *ngFor="let entry of entries">
-        <p *ngIf="entry.value">Réponse : {{entry.value}}</p>
+    <div *ngIf="entries" class="py-5 w-full sm:w-2/3 mx-auto">
+      <div *ngFor="let entry of entries" class="py-2">
+        <p class="text-light-green">{{getStringDate(entry.date)}}</p>
+        <div *ngIf="entry.value" class="input-w-icon hover:cursor-auto rounded-3xl">
+          <p>Réponse : </p>
+          <p class="text-black">{{entry.value}}</p>
+        </div>
         <div *ngIf="!entry.value" class="w-full h-16 emoji-selector rounded-3xl">
           <app-icon *ngFor="let emoji of challenge.entryTypes" [pathData]="emoji.value" [ngClass]="{'emoji-button-selected':  emoji.id === entry.idEntryType}" class="emoji-button hover:cursor-auto"></app-icon>
         </div>

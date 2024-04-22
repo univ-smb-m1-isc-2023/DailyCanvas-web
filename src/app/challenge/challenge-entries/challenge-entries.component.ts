@@ -40,12 +40,22 @@ export class ChallengeEntriesComponent implements OnInit {
       this.challenge = JSON.parse(decodeURIComponent(this.route.snapshot.params['challenge']));
       if (this.challenge.subscribeId) {
         this.entries = await this.entryService.getAllChallengeEntriesOfUser(this.challenge.subscribeId);
-        console.log(await this.entryTypeService.get(this.entries[0].idEntryType))
-        console.log(this.challenge)
       }
     } catch {
       await this.router.navigateByUrl("/home");
     }
   }
 
+  getStringDate(date: Date){
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: 'numeric'
+    };
+    const dateStringify = new Date(date).toLocaleDateString('fr-FR', options);
+    return dateStringify.charAt(0).toUpperCase() + dateStringify.substring(1);
+  }
 }
