@@ -35,7 +35,6 @@ export class CreateEventComponent {
       nonNullable: true
       }),
     description: new FormControl<string>('',{
-      validators: [Validators.required],
       nonNullable: false
     }),
     date: new FormControl<Date>(new Date()),

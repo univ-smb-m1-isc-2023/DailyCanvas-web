@@ -1,39 +1,36 @@
-<div class="w-full">
-  <form [formGroup]="eventForm" (ngSubmit)="createEvent()" class="w-3/5 mx-auto mt-24 p-10 bg-light-lavender border border-dark-lavender rounded-3xl shadow-xl z-10">
+<div class="relative sm:h-full z-0 mt-0 pt-2 sm:pt-12 flex flex-col justify-start items-center gap-8 sm:tall:gap-16">
+  <h1 class="title-dc">Ajouter un évènement</h1>
+  <form [formGroup]="eventForm" (ngSubmit)="createEvent()" class="w-11/12 sm:w-3/5 flex flex-col gap-3 pb-12 sm:pb-5">
+    <div class="input-w-icon">
+      <label class="label cursor-pointer">
+        <span class="text-dark-lavender">C'est un anniversaire ?</span>
+        <input type="checkbox" formControlName="birthday" class="checkbox-dc">
+      </label>
+    </div>
 
-    <div>
-      <input id="title" type="text" formControlName="title" placeholder="Titre de l'événement">
+    <label class="input-w-icon rounded-3xl">
+      <p>Titre : </p>
+      <input id="title" type="text" formControlName="title" placeholder="Titre de l'événement" class="input-underline w-full">
       <div *ngIf="eventForm.controls.title.dirty || eventForm.controls.title.touched " class="error">
-        <p *ngIf="eventForm?.controls?.title?.errors?.['required']">Il faut obligatoirement donner un titre à votre événement.</p>
+        <p *ngIf="eventForm?.controls?.title?.errors?.['required']">Le titre de l'évènement est obligatoire.</p>
       </div>
-    </div>
+    </label>
 
-    <div>
-      <input id="description" type="text" formControlName="description" placeholder="Description">
-    </div>
 
-    <mat-form-field>
-      <mat-label>Choose a date</mat-label>
+    <label class="input-w-icon rounded-3xl">
+      <p>Description : </p>
+      <input id="description" type="text" formControlName="description" placeholder="Description" class="input-underline w-full">
+    </label>
+
+    <mat-form-field class="bg-white p-4 rounded-3xl">
+      <mat-label>Quelle date ?</mat-label>
       <input matInput [matDatepicker]="picker" [formControl]="eventForm.controls.date">
       <mat-hint>JJ/MM/AAAA</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-<!--    <div>-->
-<!--      <label for="date">Titre de l'événement</label>-->
-<!--      <input id="date" type="text" formControlName="date">-->
-<!--      <label for="date"> jour.</label>-->
-<!--      <div *ngIf="eventForm.controls.date.dirty || eventForm.controls.date.touched " class="error">-->
-<!--        <p *ngIf="eventForm?.controls?.date?.errors?.['required']">Vous devez mettre la date de l'événement.</p>-->
-<!--      </div>-->
-<!--    </div>-->
 
-    <div>
-      <label for="birthday">C'est un anniversaire ?</label>
-      <input id="birthday" type="checkbox" formControlName="birthday">
-    </div>
-
-    <button type="submit">Submit</button>
+    <button type="submit" class="button-dc col-span-2 w-3/4 sm:w-1/4 place-self-center">Enregistrer</button>
   </form>
 </div>
 <div class="fixed bottom-32 sm:bottom-0 right-0 w-2/5 text-sky-400 fill-sky-200 opacity-10  -z-10">
