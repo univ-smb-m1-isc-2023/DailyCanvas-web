@@ -10,19 +10,19 @@ import {Event} from "../../../model/event";
   styleUrl: './events.component.css'
 })
 export class EventsComponent implements OnInit{
-  events: Event[] | undefined
+  events!: Event[];
 
   constructor(private eventService: EventService) {
   }
 
-  async getEvents(){
-    let res = await this.eventService.getAll();
-    console.log(res)
-    this.events = res;
+  async ngOnInit() {
+    await this.getEvents();
   }
 
-  ngOnInit(){
-    this.getEvents()
+  async getEvents(){
+    const res = await this.eventService.getAll();
+    console.log(res)
+    this.events = res;
   }
 
 }
