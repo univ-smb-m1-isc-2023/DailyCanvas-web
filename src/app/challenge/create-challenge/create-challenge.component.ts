@@ -123,10 +123,7 @@ export class CreateChallengeComponent implements OnInit {
         name: <string>this.challengeForm.value.name,
         entryTypes: entryTypes
       };
-      this.challengeService.createAndSubscribe(challenge).then((challenge: Challenge) => {
-        this.challengeForm.reset();
-        console.log(challenge);
-      })
+      this.challengeService.createAndSubscribe(challenge).then(() => this.challengeForm.reset())
     } else {
       this.submittedAndInvalid = true;
     }

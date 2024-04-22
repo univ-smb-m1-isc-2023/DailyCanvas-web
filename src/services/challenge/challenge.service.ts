@@ -32,4 +32,8 @@ export class ChallengeService extends GenericService<Challenge>{
     const response = await axios.get(`${API_URL}/${this.url}/no-response-of-user/${idUser}`);
     return response.data;
   }
+
+  timeToString(time: number): string{
+    return time + ' jours';
+  }
 }

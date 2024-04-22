@@ -6,6 +6,7 @@ import {ChallengeComponent} from "../challenge.component";
 import {NgFor, NgIf} from "@angular/common";
 import {FloatingNavComponent, NavElement} from "../../elements/floating-nav/floating-nav.component";
 import {EntryComponent} from "../../components/entry/entry.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-my-challenge',
@@ -15,7 +16,8 @@ import {EntryComponent} from "../../components/entry/entry.component";
     NgFor,
     NgIf,
     FloatingNavComponent,
-    EntryComponent
+    EntryComponent,
+    RouterLink
   ],
   templateUrl: './my-challenge.component.html',
   styleUrl: './my-challenge.component.css'
@@ -56,9 +58,8 @@ export class MyChallengeComponent implements OnInit {
   getModalDelete(index: number): HTMLDialogElement{
     return <HTMLDialogElement>document.getElementById("delete_" + index);
   }
-  getModalEntry(index: number): HTMLDialogElement{
-    return <HTMLDialogElement>document.getElementById("entry_" + index);
-  }
 
-  closeModalEntry = (index: number): void => { this.getModalEntry(index).close();}
+  getChallengeRoute(challenge: Challenge): string {
+    return `/challenge/${encodeURIComponent(JSON.stringify(challenge))}`;
+  }
 }

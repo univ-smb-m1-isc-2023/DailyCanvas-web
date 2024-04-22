@@ -12,6 +12,7 @@ import {CreateEventComponent} from "./event/create-event/create-event.component"
 import {EventsComponent} from "./event/events/events.component";
 import {MyChallengeComponent} from "./challenge/my-challenge/my-challenge.component";
 import {AddEntryComponent} from "./add-entry/add-entry.component";
+import {ChallengeEntriesComponent} from "./challenge/challenge-entries/challenge-entries.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -23,6 +24,7 @@ export const routes: Routes = [
   { path: 'challenge/my', component: MyChallengeComponent},
   { path: 'challenge/create', component: CreateChallengeComponent},
   { path: 'challenges', component: FindChallengeComponent},
+  {path: "challenge/:challenge", component: ChallengeEntriesComponent},
 
   { path: 'canvas/add', component: AddEntryComponent},
 
