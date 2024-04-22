@@ -1,8 +1,13 @@
 <div class="relative sm:h-full">
   <div>
-    <div *ngIf="events">
+    <div *ngIf="events" class="py-5 w-full sm:w-2/3 mx-auto">
       @for (event of events; track event.id) {
-      <p>{{event.title}} le {{getStringDate(event.date)}}</p>
+      <div class="py-2">
+        <p class="{{event.birthday ? 'text-light-green' : 'text-dark-lavender'}}">{{getStringDate(event.date, event.birthday)}}</p>
+        <div class="input-w-icon {{event.birthday ? 'bg-light-green bg-opacity-50' : ''}} hover:cursor-auto rounded-3xl">
+          <p class="text-black"><span *ngIf="event.birthday">Anniversaire de </span>{{event.title}}</p>
+        </div>
+      </div>
       } @empty {
       <p>Pas d'events</p>
       }

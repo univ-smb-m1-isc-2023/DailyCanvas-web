@@ -32,15 +32,25 @@ export class EventsComponent implements OnInit {
     this.events = await this.eventService.getAllOfUser(this.userService.getLocalUser()!.id);
   }
 
-  getStringDate(date: Date){
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: 'numeric'
-    };
+  getStringDate(date: Date, dateOnly: boolean){
+    let options: Intl.DateTimeFormatOptions;
+    if(dateOnly){
+      options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      };
+    } else {
+      options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: 'numeric'
+      };
+    }
     const dateStringify = new Date(date).toLocaleDateString('fr-FR', options);
     return dateStringify.charAt(0).toUpperCase() + dateStringify.substring(1);
   }
