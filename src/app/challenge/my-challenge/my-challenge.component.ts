@@ -61,8 +61,4 @@ export class MyChallengeComponent implements OnInit {
   }
 
   closeModalEntry = (index: number): void => { this.getModalEntry(index).close();}
-
-  test(){
-    console.log("test")
-  }
 }
