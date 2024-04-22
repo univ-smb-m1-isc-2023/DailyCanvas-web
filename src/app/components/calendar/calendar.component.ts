@@ -31,7 +31,8 @@ export class CalendarComponent implements OnInit{
     if (userId == undefined){
       this.error = true
     }else{
-      this.events = await this.eventService.getAllOfUser(userId!);
+      this.events = await this.eventService.getAllOfUserToday(userId!);
+      console.log(this.events)
     }
   }
 
@@ -46,7 +47,11 @@ export class CalendarComponent implements OnInit{
   }
 
   getStringDate(date :Date){
-    date = new Date(date)
-    return date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear().toString().substring(2,4)
+    const options: Intl.DateTimeFormatOptions = {
+
+      hour: '2-digit',
+      minute: 'numeric'
+    };
+    return new Date(date).toLocaleTimeString('fr-FR', options);
   }
 }

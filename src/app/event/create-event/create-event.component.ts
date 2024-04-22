@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {UserService} from "../../../services/user/user.service";
@@ -8,6 +8,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MAT_DATE_LOCALE, provideNativeDateAdapter} from '@angular/material/core';
+import {FloatingNavComponent, NavElement} from "../../elements/floating-nav/floating-nav.component";
 
 
 
@@ -19,7 +20,8 @@ import {MAT_DATE_LOCALE, provideNativeDateAdapter} from '@angular/material/core'
     NgIf,
     MatDatepickerModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    FloatingNavComponent
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
@@ -29,13 +31,18 @@ import {MAT_DATE_LOCALE, provideNativeDateAdapter} from '@angular/material/core'
   styleUrl: './create-event.component.css'
 })
 export class CreateEventComponent {
+  redirectLinks: NavElement[] = [
+    {
+      name: "Mes évènements",
+      link: "/events"
+    }
+  ];
   eventForm = new FormGroup({
     title: new FormControl<string>('',{
       validators: [Validators.required],
       nonNullable: true
       }),
     description: new FormControl<string>('',{
-      validators: [Validators.required],
       nonNullable: false
     }),
     date: new FormControl<Date>(new Date()),
@@ -58,7 +65,7 @@ export class CreateEventComponent {
         return
       }
       const event: Omit<Event, "id"> = {
-        user_id:id,
+        idUser:id,
         title: <string>this.eventForm.value.title,
         description: <string>this.eventForm.value.description,
         date: <Date>this.eventForm.value.date,
