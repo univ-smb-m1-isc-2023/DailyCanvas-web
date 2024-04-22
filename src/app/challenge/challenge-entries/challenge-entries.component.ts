@@ -41,6 +41,7 @@ export class ChallengeEntriesComponent implements OnInit {
       if (this.challenge.subscribeId) {
         this.entries = await this.entryService.getAllChallengeEntriesOfUser(this.challenge.subscribeId);
       }
+      console.log(this.entries)
     } catch {
       await this.router.navigateByUrl("/home");
     }
