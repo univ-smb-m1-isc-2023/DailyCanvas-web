@@ -5,11 +5,12 @@ import {NgFor, NgIf} from "@angular/common";
 import {ChallengeComponent} from "../../challenge/challenge.component";
 import {UserService} from "../../../services/user/user.service";
 import {type User} from "../../../model/user";
+import {FloatingNavComponent, NavElement} from "../../elements/floating-nav/floating-nav.component";
 
 @Component({
   selector: 'app-find-challenge',
   standalone: true,
-    imports: [NgFor, NgIf, ChallengeComponent],
+  imports: [NgFor, NgIf, ChallengeComponent, FloatingNavComponent],
   templateUrl: './find-challenge.component.html',
   styleUrl: './find-challenge.component.css'
 })
@@ -18,6 +19,16 @@ export class FindChallengeComponent implements OnInit {
   challenges!: Challenge[];
   userChallenges: Challenge[] = [];
   user!: User | undefined;
+  redirectLinks: NavElement[] = [
+    {
+      name: "Créer un défi",
+      link: "/challenge/create"
+    },
+    {
+      name: "Mes défis",
+      link: "/challenge/my"
+    }
+  ];
 
   constructor(private challengeService: ChallengeService, private userService: UserService) {
   }
@@ -33,13 +44,21 @@ export class FindChallengeComponent implements OnInit {
   }
 
   async subscribe(challenge: Challenge): Promise<void>{
-    if(!this.userIsSubcribe(challenge) && this.user){
+    if(!this.userIsSubscribe(challenge) && this.user){
       await this.challengeService.subscribeUserToChallenge({challengeId: challenge.id, userId: this.user.id})
       this.userChallenges.push(challenge);
     }
   }
 
-  userIsSubcribe(challenge: Challenge): boolean {
+  unsubscribe(challenge: Challenge){
+    console.log("unsubscribe", challenge.name)
+  }
+
+  userIsSubscribe(challenge: Challenge): boolean {
     return this.userChallenges.filter((c: Challenge) => challenge.id === c.id).length > 0;
+  }
+
+  getModal(index: number): HTMLDialogElement{
+    return <HTMLDialogElement>document.getElementById("subscribe_" + index);
   }
 }

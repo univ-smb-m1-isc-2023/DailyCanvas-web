@@ -7,6 +7,7 @@ import {UserService} from "../../../services/user/user.service";
 import {EntryTypeService} from "../../../services/entry-type/entry-type.service";
 import {type EntryType} from "../../../model/entry-type";
 import {IconComponent} from "../../elements/icon/icon.component";
+import {FloatingNavComponent, NavElement} from "../../elements/floating-nav/floating-nav.component";
 
 @Component({
   selector: 'app-create-challenge',
@@ -16,12 +17,23 @@ import {IconComponent} from "../../elements/icon/icon.component";
     NgIf,
     NgFor,
     IconComponent,
-    NgClass
+    NgClass,
+    FloatingNavComponent
   ],
   templateUrl: './create-challenge.component.html',
   styleUrl: './create-challenge.component.css'
 })
 export class CreateChallengeComponent implements OnInit {
+  redirectLinks: NavElement[] = [
+    {
+      name: "Mes défis",
+      link: "/challenge/my"
+    },
+    {
+      name: "Trouver un défi",
+      link: "/challenges"
+    }
+  ];
   exemple_emojis_select: EntryType | undefined = undefined
   emojis!: EntryType[];
   emojis_basic!: EntryType[];
@@ -111,10 +123,7 @@ export class CreateChallengeComponent implements OnInit {
         name: <string>this.challengeForm.value.name,
         entryTypes: entryTypes
       };
-      this.challengeService.createAndSubscribe(challenge).then((challenge: Challenge) => {
-        this.challengeForm.reset();
-        console.log(challenge);
-      })
+      this.challengeService.createAndSubscribe(challenge).then(() => this.challengeForm.reset())
     } else {
       this.submittedAndInvalid = true;
     }

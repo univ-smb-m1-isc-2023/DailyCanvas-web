@@ -1,32 +1,39 @@
 <div class="h-full w-full flex flex-row items-center">
-  <div class="flex flex-col basis-1/4 items-center">
-    <div class="px-5 text-center">
-      <p class="text-green text-opacity-70">
-        {{day[time.getDay()]}}
-      </p>
-      <p class="text-3xl text-dark-green ">
-        {{time.getDate()}}
-      </p>
-      <p class="text-green text-opacity-70">
-        {{month[time.getMonth()]}}
-      </p>
-    </div>
-    <div class="py-2">
-      <p class="text-md text-dark-lavender">
-        Anniversaires
-      </p>
-      <div class="text-sm flex flex-col">
-        <p>Antoine</p>
-        <p>Elyne</p>
-      </div>
-    </div>
+  <div class="text-center basis-1/6">
+    <p class="text-green text-opacity-70">
+      {{day[time.getDay()]}}
+    </p>
+    <p class="text-6xl text-dark-green ">
+      {{time.getDate()}}
+    </p>
+    <p class="text-green text-opacity-70">
+      {{month[time.getMonth()]}}
+    </p>
   </div>
-  <div class="overflow-auto h-full p-5 grow">
-    @for (event of events; track event.id){
-      <div class="flex border border-lavender rounded-3xl mb-2 p-2">
-        <p class="pr-5"> {{getStringDate(event.date)}} </p>
-        <p> {{event.title}}</p>
+
+  <div class="overflow-auto h-full self-start px-5 grow">
+    @if (birthdays.length > 0){
+    <div class="py-1 flex gap-2">
+        <p class="text-md text-dark-lavender">
+          Anniversaires :
+        </p>
+        @for (birthday of birthdays; track birthday.id){
+        <p>{{birthday.title}}</p>
+        <p class="last:hidden">-</p>
+        }
       </div>
+    }
+    @for (event of events; track event.id){
+      <div class="flex border border-lavender bg-white rounded-2xl mb-2 p-2">
+        <p class="pr-5 text-dark-lavender font-medium"> {{getStringDate(event.date)}} </p>
+        <p> {{event.title}}</p>
+        @if(event.description){
+        <p class="ml-2 text-lavender">{{event.description}}</p>
+        }
+      </div>
+    }
+    @if(events.length === 0){
+    <p>Rien de prévu aujourd'hui !</p>
     }
   </div>
 </div>

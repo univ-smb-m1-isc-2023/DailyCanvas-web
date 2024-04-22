@@ -19,6 +19,11 @@
         <p *ngIf="loginForm?.controls?.password?.errors?.['required']">Veuillez renseigner votre mot de passe.</p>
       </div>
     </div>
+    @if (loginError){
+      <div class="error">
+        <p class="text-error text-center"> Mot de passe ou Email incorrect !</p>
+      </div>
+    }
 
     <button class="button-dc" type="submit">
       @if (loading){
@@ -27,10 +32,38 @@
         Me connecter
       }
     </button>
-    <div *ngIf="infosDontMatch" class="error">
-      <p *ngIf="infosDontMatch">Les informations ne correspondent pas.</p>
-    </div>
   </form>
   </div>
   <asl-google-signin-button type='standard' shape="pill"></asl-google-signin-button>
+  @if (googleError){
+    <div class="error">
+      <p class="text-error text-center"> Erreur lors de la connexion avec Google !</p>
+    </div>
+  }
 </div>
+
+<dialog id="validate_modale" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box bg-light-lavender">
+    <h3 class="font-bold text-lg text-dark-green">Bravo !</h3>
+    <p class="py-4">Vous êtes maintenant connecté à discord !</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="error_modale" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box bg-light-lavender">
+    <h3 class="font-bold text-lg text-dark-lavender">Erreur !</h3>
+    <p class="py-4">Une erreur est survenue lors de votre inscription</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Fermer</button>
+      </form>
+    </div>
+  </div>
+</dialog>

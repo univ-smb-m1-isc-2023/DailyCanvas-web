@@ -55,6 +55,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.getIfUserLogIn()
+    this.getConnectionPage()
     this.userService.isLoggedIn.subscribe((value) => {
       this.loggedIn = value;
     });

@@ -1,6 +1,12 @@
-<div>
-  <h1>Account</h1>
-  <p>{{user?.username}}</p>
-  <p>{{user?.email}}</p>
-  <button type="button" class="button-dc col-span-2 w-3/4 sm:w-1/4 place-self-center" (click)="disconnect()">Me déconnecter</button>
+<div class="relative sm:h-full">
+  <div>
+    <h1>Account</h1>
+    <p>{{user?.username}}</p>
+    <p>{{user?.email}}</p>
+    <button type="button" class="button-dc col-span-2 w-3/4 sm:w-1/4 place-self-center" (click)="disconnect()">Me déconnecter</button>
+  </div>
+
+  <div class="fixed bottom-32 sm:bottom-0 right-0 w-2/5 text-rose-400 fill-rose-200 opacity-10  -z-10">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="6" r="4"/><path stroke-linecap="round" d="M15 20.615c-.91.247-1.926.385-3 .385c-3.866 0-7-1.79-7-4s3.134-4 7-4s7 1.79 7 4c0 .345-.077.68-.22 1"/></g></svg>
+  </div>
 </div>

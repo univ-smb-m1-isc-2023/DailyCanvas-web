@@ -73,6 +73,7 @@ export class UserService extends GenericService<User>{
       this.localstore.set("user",data.user);
       this.tokenLocalstore.set("token",data.token);
       this._isLoggedIn.next(true);
+      this.setAxiosToken();
       return true;
     }catch (e: any) {
       return {status: e.response.status, message: e.response.data};
@@ -87,6 +88,7 @@ export class UserService extends GenericService<User>{
     this.localstore.set("user",res.data.user);
     this.tokenLocalstore.set("token",res.data.token);
     this._isLoggedIn.next(true);
+    this.setAxiosToken();
     return true;
   }
 
@@ -105,6 +107,7 @@ export class UserService extends GenericService<User>{
     this.localstore.set("user",res.data.user);
     this.tokenLocalstore.set("token",res.data.token);
     this._isLoggedIn.next(true);
+    this.setAxiosToken();
     return true;
   }
 }

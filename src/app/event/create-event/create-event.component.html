@@ -1,41 +1,39 @@
-<div class="w-full">
-  <form [formGroup]="eventForm" (ngSubmit)="createEvent()" class="w-3/5 mx-auto mt-24 p-10 bg-light-lavender border border-dark-lavender rounded-3xl shadow-xl z-10">
+<div class="relative sm:h-full z-0 mt-0 pt-2 sm:pt-12 flex flex-col justify-start items-center gap-8 sm:tall:gap-16">
+  <h1 class="title-dc">Ajouter un évènement</h1>
+  <form [formGroup]="eventForm" (ngSubmit)="createEvent()" class="w-11/12 sm:w-3/5 flex flex-col gap-3 pb-12 sm:pb-5">
+    <div class="input-w-icon">
+      <label class="label cursor-pointer">
+        <span class="text-dark-lavender">C'est un anniversaire ?</span>
+        <input type="checkbox" formControlName="birthday" class="checkbox-dc">
+      </label>
+    </div>
 
-    <div>
-      <input id="title" type="text" formControlName="title" placeholder="Titre de l'événement">
+    <label class="input-w-icon rounded-3xl">
+      <p>Titre : </p>
+      <input id="title" type="text" formControlName="title" placeholder="Titre de l'événement" class="input-underline w-full">
       <div *ngIf="eventForm.controls.title.dirty || eventForm.controls.title.touched " class="error">
-        <p *ngIf="eventForm?.controls?.title?.errors?.['required']">Il faut obligatoirement donner un titre à votre événement.</p>
+        <p *ngIf="eventForm?.controls?.title?.errors?.['required']">Le titre de l'évènement est obligatoire.</p>
       </div>
-    </div>
+    </label>
 
-    <div>
-      <input id="description" type="text" formControlName="description" placeholder="Description">
-    </div>
 
-    <mat-form-field>
-      <mat-label>Choose a date</mat-label>
+    <label class="input-w-icon rounded-3xl">
+      <p>Description : </p>
+      <input id="description" type="text" formControlName="description" placeholder="Description" class="input-underline w-full">
+    </label>
+
+    <mat-form-field class="bg-white p-4 rounded-3xl">
+      <mat-label>Quand aura lieu cet évènement ?</mat-label>
       <input matInput [matDatepicker]="picker" [formControl]="eventForm.controls.date">
       <mat-hint>JJ/MM/AAAA</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-<!--    <div>-->
-<!--      <label for="date">Titre de l'événement</label>-->
-<!--      <input id="date" type="text" formControlName="date">-->
-<!--      <label for="date"> jour.</label>-->
-<!--      <div *ngIf="eventForm.controls.date.dirty || eventForm.controls.date.touched " class="error">-->
-<!--        <p *ngIf="eventForm?.controls?.date?.errors?.['required']">Vous devez mettre la date de l'événement.</p>-->
-<!--      </div>-->
-<!--    </div>-->
 
-    <div>
-      <label for="birthday">C'est un anniversaire ?</label>
-      <input id="birthday" type="checkbox" formControlName="birthday">
-    </div>
-
-    <button type="submit">Submit</button>
+    <button type="submit" class="button-dc col-span-2 w-3/4 sm:w-1/4 place-self-center">Enregistrer</button>
   </form>
 </div>
-<div class="absolute bottom-0 right-0 w-2/5 text-amber-400 text-opacity-10 -z-10">
-  <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" viewBox="0 0 36 36"><path fill="currentColor" d="M32.25 6H29v2h3v22H4V8h3V6H3.75A1.78 1.78 0 0 0 2 7.81v22.38A1.78 1.78 0 0 0 3.75 32h28.5A1.78 1.78 0 0 0 34 30.19V7.81A1.78 1.78 0 0 0 32.25 6" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M8 14h2v2H8z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M14 14h2v2h-2z" class="clr-i-outline clr-i-outline-path-3"/><path fill="currentColor" d="M20 14h2v2h-2z" class="clr-i-outline clr-i-outline-path-4"/><path fill="currentColor" d="M26 14h2v2h-2z" class="clr-i-outline clr-i-outline-path-5"/><path fill="currentColor" d="M8 19h2v2H8z" class="clr-i-outline clr-i-outline-path-6"/><path fill="currentColor" d="M14 19h2v2h-2z" class="clr-i-outline clr-i-outline-path-7"/><path fill="currentColor" d="M20 19h2v2h-2z" class="clr-i-outline clr-i-outline-path-8"/><path fill="currentColor" d="M26 19h2v2h-2z" class="clr-i-outline clr-i-outline-path-9"/><path fill="currentColor" d="M8 24h2v2H8z" class="clr-i-outline clr-i-outline-path-10"/><path fill="currentColor" d="M14 24h2v2h-2z" class="clr-i-outline clr-i-outline-path-11"/><path fill="currentColor" d="M20 24h2v2h-2z" class="clr-i-outline clr-i-outline-path-12"/><path fill="currentColor" d="M26 24h2v2h-2z" class="clr-i-outline clr-i-outline-path-13"/><path fill="currentColor" d="M10 10a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1" class="clr-i-outline clr-i-outline-path-14"/><path fill="currentColor" d="M26 10a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1" class="clr-i-outline clr-i-outline-path-15"/><path fill="currentColor" d="M13 6h10v2H13z" class="clr-i-outline clr-i-outline-path-16"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+<app-floating-nav [navElements]="redirectLinks" class="visible sm:hidden"></app-floating-nav>
+<div class="fixed bottom-32 sm:bottom-0 right-0 w-2/5 text-sky-400 fill-sky-200 opacity-10  -z-10">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M14 22h-4c-3.771 0-5.657 0-6.828-1.172C2 19.657 2 17.771 2 14v-2c0-3.771 0-5.657 1.172-6.828C4.343 4 6.229 4 10 4h4c3.771 0 5.657 0 6.828 1.172C22 6.343 22 8.229 22 12v2c0 3.771 0 5.657-1.172 6.828c-.653.654-1.528.943-2.828 1.07M7 4V2.5M17 4V2.5M21.5 9H10.75M2 9h3.875"/><path fill="currentColor" d="M18 17a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></g></svg>
 </div>

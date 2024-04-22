@@ -1,17 +1,25 @@
 import {Component, OnInit} from '@angular/core';
 import ApexCharts from 'apexcharts'
+import {EntryService} from "../../../services/entry/entry.service";
+import {UserService} from "../../../services/user/user.service";
+import {Entry} from "../../../model/entry";
+import {NgClass, NgIf} from "@angular/common";
 @Component({
   selector: 'app-daily-streak',
   standalone: true,
-  imports: [],
+  imports: [NgIf, NgClass],
   templateUrl: './daily-streak.component.html',
   styleUrl: './daily-streak.component.css'
 })
 export class DailyStreakComponent implements OnInit{
+  entries!: Entry[];
 
+  constructor(private entryService: EntryService, private userService: UserService) {
+  }
 
-  ngOnInit(){
-    var options = {
+  async ngOnInit(){
+    this.entries = await this.entryService.getAllEntriesOfUser(this.userService.getLocalUser()!.id)
+    let options = {
       chart: {
         width: "100%",
         height: "100%",
@@ -26,7 +34,7 @@ export class DailyStreakComponent implements OnInit{
       },
     }
 
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    let chart = new ApexCharts(document.querySelector("#chart"), options);
 
     chart.render();
   }

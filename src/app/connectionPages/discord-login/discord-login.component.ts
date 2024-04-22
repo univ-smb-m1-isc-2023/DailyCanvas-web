@@ -30,6 +30,8 @@ export class DiscordLoginComponent implements OnInit{
   load: boolean = false;
   discordUsername: string | undefined = undefined;
   discordId: string | undefined = undefined;
+  loginError: boolean = false;
+  googleError: boolean = false;
 
   loginForm = new FormGroup({
     email: new FormControl<string>('', {
@@ -46,6 +48,7 @@ export class DiscordLoginComponent implements OnInit{
   }
 
   async connectDiscord(user: SocialUser | undefined = undefined){
+    this.loginError = false;
     this.load = true
     // login ou google
     let res = undefined
@@ -56,20 +59,49 @@ export class DiscordLoginComponent implements OnInit{
         password: <string>this.loginForm.value.password
       };
       userEmail = userDetails.email
-      res = await axios.post(`${API_URL}/auth/login`, userDetails);
+      try {
+        res = await axios.post(`${API_URL}/auth/login`, userDetails);
+      }catch (e) {
+        console.log("catch")
+        this.loginError = true;
+        return
+      }
+      if (res == undefined || res.status != 200 ){
+        console.log("Erreur lors de la connexion")
+        this.loginError = true;
+        return
+      }
     }else{
       console.log(user)
       const userDetails = {name: user!.name, email: user!.email, firstname : user!.firstName, lastname: user!.lastName};
       userEmail = userDetails.email
-      res = await axios.post(`${API_URL}/auth/googleregister`, userDetails);
+      try {
+        res = await axios.post(`${API_URL}/auth/googleregister`, userDetails);
+      }catch (e) {
+        console.log("catch")
+        this.googleError = true;
+        return
+      }
+      if (res == undefined || res.status != 200 ){
+        console.log("Erreur lors de la connexion")
+        this.googleError = true;
+        return
+      }
     }
-    if (res == undefined){
-      console.log("Erreur lors de la connexion")
-      return
-    }
+    let modale = <HTMLDialogElement>document.getElementById("validate_modale");
     //requete to discord
-    res = await axios.post(`${API_URL}/auth/discord`, {userEmail: userEmail, discordUsername: this.discordUsername, discordId: this.discordId});
-    console.log("Send request, "+userEmail+" : "+this.discordUsername)
+    try {
+      res = await axios.post(`${API_URL}/auth/discord`, {userEmail: userEmail, discordUsername: this.discordUsername, discordId: this.discordId});
+    }catch (e) {
+      console.log("Erreur lors de la connexion");
+      modale = <HTMLDialogElement>document.getElementById("error_modale");
+    }
+    console.log("Send request, "+userEmail+" : "+this.discordUsername+" : "+this.discordId)
+    if (res == undefined || res.status != 200){
+      console.log("Erreur lors de la connexion");
+       modale = <HTMLDialogElement>document.getElementById("error_modale");
+    }
+    modale.showModal();
     this.load = false
   }
 
