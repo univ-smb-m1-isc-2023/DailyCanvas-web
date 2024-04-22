@@ -1,9 +1,9 @@
 <div class="relative sm:h-full">
-  <div>
+  <div *ngIf="events">
     @for (event of events; track event.id) {
-    <p>{{event.title}} le {{event.date.toString()}}</p>
+    <p>{{event.title}} le {{getStringDate(event.date)}}</p>
     }
-    @if(events?.length == 0 || !events){
+    @if(events.length == 0){
     <p>Pas d'events</p>
     }
   </div>
