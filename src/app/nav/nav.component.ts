@@ -88,6 +88,14 @@ export class NavComponent {
     return  this.router.url === URL;
   }
 
+  isCurrentGroupURL(group: navElement): boolean {
+    for (const child of group.children) {
+      if(child.link === this.router.url){
+        return true;
+      }
+    }
+    return false;
+  }
 }
 interface navElement {
   name: string;

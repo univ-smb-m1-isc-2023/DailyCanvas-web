@@ -16,7 +16,7 @@
       <p [routerLink]="PROGRESS.children[0].link" class="phone-nav-icon" [ngClass]="{'phone-nav-icon-selected': isCurrentURL(PROGRESS.children[0].link)}">
         <app-icon [pathData]="PROGRESS.icon"></app-icon>
       </p>
-      <p [routerLink]="CHALLENGES.children[0].link" class="phone-nav-icon" [ngClass]="{'phone-nav-icon-selected': isCurrentURL(CHALLENGES.children[0].link)}">
+      <p [routerLink]="CHALLENGES.children[0].link" class="phone-nav-icon" [ngClass]="{'phone-nav-icon-selected': isCurrentGroupURL(CHALLENGES)}">
         <app-icon [pathData]="CHALLENGES.icon"></app-icon>
       </p>
       <p [routerLink]="ENTRY.children[0].link" class="phone-nav-icon-big" [ngClass]="{'bg-light-green text-green': isCurrentURL(ENTRY.children[0].link)}">
