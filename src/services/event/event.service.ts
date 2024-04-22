@@ -13,13 +13,18 @@ export class EventService extends GenericService<Event>{
     super("event");
   }
 
-  async getAllOfUser(idUser: number){
-    const response = await axios.get<Event[]>(`${API_URL}/event/byUser/`+idUser);
+  async getAllOfUser(idUser: number): Promise<Event[]> {
+    const response = await axios.get(`${API_URL}/${this.url}/byUser/`+idUser);
     return response.data;
   }
 
-  async getAllBirthdaysOfUser(idUser: number){
-    const response = await axios.get<Event[]>(`${API_URL}/event/anniversary/`+idUser);
+  async getAllOfUserToday(idUser: number): Promise<Event[]> {
+    const response = await axios.get(`${API_URL}/${this.url}/today/`+idUser);
+    return response.data;
+  }
+
+  async getAllBirthdaysOfUser(idUser: number): Promise<Event[]> {
+    const response = await axios.get(`${API_URL}/${this.url}/anniversary/`+idUser);
     return response.data;
   }
 }

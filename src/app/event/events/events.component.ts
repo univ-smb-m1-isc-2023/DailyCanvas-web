@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EventService} from "../../../services/event/event.service";
 import {Event} from "../../../model/event";
 import {NgIf} from "@angular/common";
+import {UserService} from "../../../services/user/user.service";
 
 @Component({
   selector: 'app-events',
@@ -13,7 +14,7 @@ import {NgIf} from "@angular/common";
 export class EventsComponent implements OnInit{
   events!: Event[];
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService, private userService: UserService) {
   }
 
   async ngOnInit() {
@@ -21,9 +22,7 @@ export class EventsComponent implements OnInit{
   }
 
   async getEvents(){
-    const res = await this.eventService.getAll();
-    console.log(res)
-    this.events = res;
+    this.events = await this.eventService.getAllOfUser(this.userService.getLocalUser()!.id);
   }
 
   getStringDate(date: Date){

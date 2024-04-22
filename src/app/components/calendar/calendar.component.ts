@@ -31,7 +31,8 @@ export class CalendarComponent implements OnInit{
     if (userId == undefined){
       this.error = true
     }else{
-      this.events = await this.eventService.getAllOfUser(userId!);
+      this.events = await this.eventService.getAllOfUserToday(userId!);
+      console.log(this.events)
     }
   }
 
