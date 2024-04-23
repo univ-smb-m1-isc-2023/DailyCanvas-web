@@ -25,8 +25,8 @@ const MODULES =[
 export class AppComponent implements OnInit{
   loggedIn: boolean = false;
   title = 'Daily Canvas';
-  page: number = 2;
-  numPath = {"register": 1,"login": 2, "conditions": 3, "confidentiality": 4, "discord": 5}
+  page: number = 6;
+  numPath = {"register": 1,"account":2,"login": 2, "conditions": 3, "confidentiality": 4, "discord": 5, "home": 6}
 
   constructor(private userService: UserService, private router: Router) {
   }

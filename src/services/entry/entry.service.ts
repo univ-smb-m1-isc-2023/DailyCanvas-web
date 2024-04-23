@@ -26,6 +26,11 @@ export class EntryService extends GenericService<Entry>{
     return response.data;
   }
 
+  async getAllEntriesOfStartChallengeOfUser(id: number): Promise<Entry[]> {
+    const response = await axios.get(`${API_URL}/${this.url}/get-all-of-start-challenge-and-user/${id}`);
+    return response.data;
+  }
+
   checkErrors(form: FormGroup, challenge: Challenge): void {
     if(this.isText(challenge) && !form.value.textResponse){
       form.get('textResponse')?.setErrors({required: "TextResponse is required"})

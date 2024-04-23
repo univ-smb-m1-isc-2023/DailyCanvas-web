@@ -24,12 +24,10 @@ import {DailyStreakComponent} from "../components/daily-streak/daily-streak.comp
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent {
 
   constructor(private localstore: LocalstoreService<User>, private userService: UserService, private router: Router) {
   }
-
-  ngOnInit(): void {}
 
   protected readonly LocalstoreService = LocalstoreService;
 

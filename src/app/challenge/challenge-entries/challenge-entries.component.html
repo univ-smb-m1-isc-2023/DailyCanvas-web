@@ -12,7 +12,7 @@
           <app-icon *ngFor="let emoji of challenge.entryTypes" [pathData]="emoji.value" [ngClass]="{'emoji-button-selected':  emoji.id === entry.idEntryType}" class="emoji-button hover:cursor-auto"></app-icon>
         </div>
       </div>
-      <p *ngIf="entries.length === 0" class="text-center">Vous n'avez encore pas ajouté de réponse pour ce challenge.</p>
+      <p *ngIf="entries.length === 0" class="text-center">Vous n'avez pas encore ajouté de réponse pour ce challenge.</p>
     </div>
     <div *ngIf="!entries" class="w-full pt-20 flex justify-center items-center">
       <span class="loading loading-spinner loading-lg text-dark-lavender"></span>

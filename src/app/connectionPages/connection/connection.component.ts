@@ -1,4 +1,4 @@
-import {Component, Input, Output} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {RegisterComponent} from "../register/register.component";
 import {LoginComponent} from "../login/login.component";
 import {GoogleLoginComponent} from "../google-login/google-login.component";
@@ -7,27 +7,30 @@ import {NgIf} from "@angular/common";
 import {ConfidentialityRulesComponent} from "../../utils/confidentiality-rules/confidentiality-rules.component";
 import {UtilisationConditionsComponent} from "../../utils/utilisation-conditions/utilisation-conditions.component";
 import {DiscordLoginComponent} from "../discord-login/discord-login.component";
+import {DailyCanvasInfosComponent} from "../../daily-canvas-infos/daily-canvas-infos.component";
+import {ConnectionPageService} from "../../../services/connectionPage/connection-page.service";
 
 @Component({
   selector: 'app-connection',
   standalone: true,
   imports: [
-      RegisterComponent,
-      LoginComponent,
-      GoogleLoginComponent,
-      NgIf,
-      ConfidentialityRulesComponent,
-      UtilisationConditionsComponent,
-      DiscordLoginComponent,
+    RegisterComponent,
+    LoginComponent,
+    GoogleLoginComponent,
+    NgIf,
+    ConfidentialityRulesComponent,
+    UtilisationConditionsComponent,
+    DiscordLoginComponent,
+    DailyCanvasInfosComponent,
   ],
   templateUrl: './connection.component.html',
   styleUrl: './connection.component.css'
 })
-export class ConnectionComponent {
+export class ConnectionComponent implements OnInit{
   @Input("page")
-  page:number = 2;
+  page:number = 6;
 
-  constructor(private screenSizeService: ScreenSizeService) {
+  constructor(private screenSizeService: ScreenSizeService, private connectionPage: ConnectionPageService) {
   }
   changePage($event: number) {
     this.page = $event;
@@ -35,5 +38,11 @@ export class ConnectionComponent {
 
   isMobileDevice(){
     return this.screenSizeService.isMobileDevice();
+  }
+
+  ngOnInit() {
+    this.connectionPage.numPage.subscribe((value) => {
+      this.page = value;
+    });
   }
 }
