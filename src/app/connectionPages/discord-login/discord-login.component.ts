@@ -123,4 +123,10 @@ export class DiscordLoginComponent implements OnInit{
       this.loggedIn = (user != null);
     });
   }
+
+  closePage(){
+    setInterval(
+      window.close, 800
+    )
+  }
 }
