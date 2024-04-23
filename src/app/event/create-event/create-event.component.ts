@@ -57,7 +57,6 @@ export class CreateEventComponent {
   }
 
   createEvent(){
-    console.log(this.eventForm)
     if(this.eventForm.status === "VALID"){
       let id: number | undefined = this.userService.getLocalUser()?.id
       if (id == undefined){

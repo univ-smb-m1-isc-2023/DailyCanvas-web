@@ -51,7 +51,6 @@ export class UserService extends GenericService<User>{
       let res = await axios.get(`${API_URL}/auth/`);
       if (res.data == true) {
         this._isLoggedIn.next(true);
-        console.log('user localstore', this.localstore.get('user'));
         return true;
       }
     }catch (e){

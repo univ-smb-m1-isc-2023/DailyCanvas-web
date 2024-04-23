@@ -72,7 +72,6 @@ export class DiscordLoginComponent implements OnInit{
         return
       }
     }else{
-      console.log(user)
       const userDetails = {name: user!.name, email: user!.email, firstname : user!.firstName, lastname: user!.lastName};
       userEmail = userDetails.email
       try {
