@@ -29,6 +29,9 @@
   .input-w-icon input {
     @apply bg-white text-black hover:cursor-pointer focus:outline-none;
   }
+  .input-w-icon input[disabled] {
+    cursor: default !important;
+  }
   .input-w-icon .input-underline {
     @apply border-b border-lavender;
   }
