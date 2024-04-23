@@ -32,7 +32,6 @@ export class AppComponent implements OnInit{
   }
 
   getConnectionPage(){
-    console.log(window.location.pathname)
     for (const [key, value] of Object.entries(this.numPath)){
       if (window.location.pathname.includes(key)){
         this.page = value;

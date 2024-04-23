@@ -82,6 +82,8 @@ export class GraphComponent implements OnInit{
         type: "datetime",
       },
       yaxis: {
+        min: 10,
+        max: 50,
         showAlways: false,
         showForNullSeries: false,
         show: false,
