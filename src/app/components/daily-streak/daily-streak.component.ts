@@ -13,11 +13,38 @@ import {GraphComponent} from "../../elements/graph/graph.component";
 })
 export class DailyStreakComponent implements OnInit{
   entries!: Entry[];
+  entriesStartChallenge!: number[][];
 
   constructor(private entryService: EntryService, private userService: UserService) {
   }
 
   async ngOnInit(){
-    this.entries = await this.entryService.getAllEntriesOfUser(this.userService.getLocalUser()!.id)
+    this.entries = await this.entryService.getAllEntriesOfUser(this.userService.getLocalUser()!.id);
+    this.entriesStartChallenge = this.convertEntriesToApexChartData(await this.entryService.getAllEntriesOfStartChallengeOfUser(this.userService.getLocalUser()!.id));
+  }
+
+  convertEntriesToApexChartData(entries: Entry[]): number[][]{
+    const data: number[][] = [];
+    entries.forEach((entry: Entry) => {
+      data.push([(new  Date(entry.date)).getTime(), this.convertEntryTypeBasicToString(entry.idEntryType)])
+    });
+    return data;
+  }
+
+  convertEntryTypeBasicToString(id: number): number{
+    switch (id){
+      case 1:
+        return 50;
+      case 24:
+        return 40;
+      case 9:
+        return 30;
+      case 5:
+        return 20;
+      case 4:
+        return 10;
+      default:
+        return 0;
+    }
   }
 }

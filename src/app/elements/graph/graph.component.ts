@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {
   ChartComponent,
   ApexChart,
@@ -6,34 +6,53 @@ import {
   ApexTitleSubtitle,
   ApexDataLabels,
   ApexXAxis,
-  ApexStroke, NgApexchartsModule
+  ApexStroke, NgApexchartsModule, ApexTooltip, ApexYAxis
 } from "ng-apexcharts";
+import {EntryType} from "../../../model/entry-type";
+import {EntryTypeService} from "../../../services/entry-type/entry-type.service";
+import {IconComponent} from "../icon/icon.component";
+import {NgFor, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-graph',
   standalone: true,
   imports: [
-    NgApexchartsModule
+    NgApexchartsModule,
+    IconComponent,
+    NgFor,
+    NgIf
   ],
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.css'
 })
-export class GraphComponent {
-  @Input() data: number[] = [];
+export class GraphComponent implements OnInit{
+  @Input() data: number[][] = [];
   @ViewChild("chart") chart!: ChartComponent;
-  public chartOptions!: Partial<ChartOptions>;
+  emojis_basic!: EntryType[];
+  public chartOptions!: ChartOptions;
 
-  constructor() {
+  constructor(private entryTypesService: EntryTypeService) {
+  }
+
+  async ngOnInit(): Promise<void> {
+    const emojis = await this.entryTypesService.getEmojis();
+    this.emojis_basic = [
+      emojis[0],
+      emojis[20],
+      emojis[6],
+      emojis[2],
+      emojis[1]
+    ];
     this.chartOptions = {
       series: [
         {
-          name: "Desktops",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+          name: "Trouver un petit moment de bonheur",
+          data: this.data,
         }
       ],
       chart: {
         height: 350,
-        type: "line",
+        type: "area",
         zoom: {
           enabled: false
         }
@@ -45,27 +64,36 @@ export class GraphComponent {
         curve: "straight"
       },
       title: {
-        text: "Product Trends by Month",
+        text: "Trouver un petit moment de bonheur",
         align: "left"
       },
       grid: {
         row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+          colors: ["#e3dae733", "transparent"], // takes an array which will be repeated on columns
           opacity: 0.5
         }
       },
+      tooltip: {
+        x: {
+          format: "dd MMM yyyy"
+        }
+      },
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep"
-        ]
+        type: "datetime",
+      },
+      yaxis: {
+        showAlways: false,
+        showForNullSeries: false,
+        show: false,
+        labels: {
+          show: false
+        },
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        }
       }
     };
   }
@@ -74,7 +102,9 @@ export class GraphComponent {
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
+  tooltip: ApexTooltip;
   xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
   dataLabels: ApexDataLabels;
   grid: ApexGrid;
   stroke: ApexStroke;

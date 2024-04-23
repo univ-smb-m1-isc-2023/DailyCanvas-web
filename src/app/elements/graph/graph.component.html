@@ -1,12 +1,16 @@
-<div id="chart">
+<div class="w-full flex" *ngIf="data">
+  <div class="w-10 pt-5 pb-10 flex flex-col justify-between">
+    <app-icon *ngFor="let emoji of emojis_basic" [pathData]="emoji.value" class="w-full text-dark-lavender"></app-icon>
+  </div>
   <apx-chart
     #chart
-    [series]="chartOptions.series"
+    [series]="[{name: 'Trouver un petit moment de bonheur', data: this.data}]"
     [chart]="chartOptions.chart"
     [xaxis]="chartOptions.xaxis"
     [dataLabels]="chartOptions.dataLabels"
     [grid]="chartOptions.grid"
     [stroke]="chartOptions.stroke"
-    [title]="chartOptions.title"
+    [colors]="['#6d507a']"
+    class="flex-grow"
   ></apx-chart>
 </div>

@@ -32,7 +32,6 @@ export class CalendarComponent implements OnInit{
       this.error = true
     }else{
       this.events = await this.eventService.getAllOfUserToday(userId!);
-      console.log(this.events)
     }
   }
 
