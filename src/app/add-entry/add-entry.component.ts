@@ -5,6 +5,7 @@ import {Challenge} from "../../model/challenge";
 import {ChallengeService} from "../../services/challenge/challenge.service";
 import {UserService} from "../../services/user/user.service";
 import {NgFor, NgIf} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-add-entry',
@@ -13,7 +14,8 @@ import {NgFor, NgIf} from "@angular/common";
     EntryComponent,
     ChallengeComponent,
     NgIf,
-    NgFor
+    NgFor,
+    RouterLink
   ],
   templateUrl: './add-entry.component.html',
   styleUrl: './add-entry.component.css'

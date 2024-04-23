@@ -54,4 +54,13 @@ export class EventsComponent implements OnInit {
     const dateStringify = new Date(date).toLocaleDateString('fr-FR', options);
     return dateStringify.charAt(0).toUpperCase() + dateStringify.substring(1);
   }
+
+  getModalDelete(index: number): HTMLDialogElement {
+    return <HTMLDialogElement>document.getElementById("delete_" + index);
+  }
+
+  async delete(event: Event): Promise<void> {
+    await this.eventService.delete(event.id);
+    this.events = this.events.filter((event_in: Event) => event_in.id !== event.id);
+  }
 }
