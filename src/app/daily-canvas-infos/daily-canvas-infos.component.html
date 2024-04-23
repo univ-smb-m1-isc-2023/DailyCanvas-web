@@ -1,0 +1,40 @@
+<div class="w-full h-full overflow-auto overflow-x-hidden">
+  <div class="h-1/3 flex justify-center py-10">
+    <img src="./assets/icons/icon-512x512.png">
+  </div>
+  @if (isMobileDevice()){
+    <div class="flex justify-center p-5">
+      <input type="button" value="Me connecter" (click)="changePage()" class="hover:cursor-pointer text-dark-lavender underline"/>
+    </div>
+  }
+  <div class="w-full sm:px-20 px-12 flex flex-col gap-14 mb-36">
+    <div class="max-w-screen-md self-start">
+      <h1 class="text-dark-lavender text-2xl">
+        Bullet Journal intéractif !
+      </h1>
+      <p class="">
+        Bienvenue sur DailyCanvas, votre compagnon quotidien pour cultiver la créativité, la productivité et le bien-être ! Que vous cherchiez à relever de nouveaux défis, à suivre vos progrès personnels ou simplement à vous inspirer au quotidien, DailyCanvas est là pour vous accompagner.
+      </p>
+    </div>
+    <div class="max-w-screen-md self-end">
+      <h1 class="text-dark-lavender text-2xl">
+        Répondez à vos défis au quotidien !
+      </h1>
+      <p class="">
+        Grâce à notre interface conviviale et à notre intégration transparente avec Discord, vous pouvez accéder à DailyCanvas depuis n'importe où, que ce soit sur votre ordinateur de bureau, votre téléphone portable ou même en discutant avec notre bot Discord. Laissez-vous guider par notre système intuitif pour enregistrer vos réponses aux défis, marquer des événements importants ou simplement explorer de nouvelles idées.
+      </p>
+    </div>
+    <p class="max-w-screen-md self-center text-center text-dark-lavender">
+      Rejoignez-nous dès aujourd'hui et commencez votre voyage vers une vie plus créative et épanouissante avec DailyCanvas !
+    </p>
+    <input type="button" value="Me connecter" (click)="changePage()" class="hover:cursor-pointer text-dark-lavender underline"/>
+  </div>
+</div>
+
+<div class="absolute top-5 right-2 opacity-25 -z-10">
+  <img src="assets/icons/flower1.png" alt="flower image">
+</div>
+
+<div class="absolute bottom-5 -left-20 opacity-10 -z-10">
+  <img src="assets/icons/flower2.png" alt="flower image">
+</div>

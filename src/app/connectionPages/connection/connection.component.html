@@ -5,6 +5,8 @@
     <app-utilisation-conditions></app-utilisation-conditions>
   } @else if (page == 5){
     <app-discord-login></app-discord-login>
+  } @else if (page == 6){
+    <app-daily-canvas-infos (pageChange)="changePage($event)"></app-daily-canvas-infos>
   }
 } @else {
 
